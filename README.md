@@ -1,6 +1,8 @@
 # Hades II Randomizer
 **Hades II Randomizer** is a randomizer mod for the game [Hades II](https://store.steampowered.com/app/1145350/Hades_II/). It randomizes certain parts of the game everytime you start a new run, requiring you to approach the game in a completely different way compared to the normal game. 
 
+Please keep in mind that this mod is in it's early stages, so there might be issues or crashes. Hades II is also in Early Access, so any update may break the mod or cause issues.
+
 ### IMPORTANT: Please *disable* the *Transmit Data* setting in the Hades settings menu! Supergiant Games uses the data for balancing and fine tuning and the randomizer throws all balancing out of the window, making the data useless and noisy for the developers.
 
 ## What can be randomized?
