@@ -7,7 +7,7 @@ Please keep in mind that this mod is in it's early stages, so there might be iss
 
 ## What can be randomized?
 - **Enemies**: Enemies, elite enemies and minibosses are randomized. This means that you can encounter an enemy from, for example, the Fields of Mourning in Erebus or even surface enemies in the underworld.
-- **Boons**: Boons/Offerings from gods are randomized. This means that, for example, Poseidon can offer upgrades from Aphrodite or Demeter instead of the usual Poseidon boons.
+- **Boons**: Boons/Offerings from gods are randomized. This means that, for example, Poseidon can offer upgrades from Aphrodite or Demeter instead of the usual Poseidon boons. Boons are only randomized at the start of the run, so a god will keep offering the same boons for the whole run, until you start a new run.
 - **Elemental Traits**: The elemental traits (water, fire, etc.) offered by the gods are randomized. This affects the way you should approach infusion boons.
 
 ## Prerequisites
