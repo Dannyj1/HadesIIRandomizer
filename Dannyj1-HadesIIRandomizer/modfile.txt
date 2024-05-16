@@ -1,9 +1,9 @@
+Top Import "register.lua"
 Top Import "config.lua"
+
 Import "utils.lua"
 Import "data.lua"
 Import "enemy_randomizer.lua"
 Import "boon_randomizer.lua"
 Import "stat_scaler.lua"
-Import "main.lua"
-
-
+Import "randomizer_core.lua"

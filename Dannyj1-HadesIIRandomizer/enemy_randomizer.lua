@@ -14,8 +14,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ]]
 
+if not Hades2Randomizer.Config.Enabled then
+    return
+end
+
 -- TODO: Randomize Chronos spawns and maybe Scylla spawns if that doesn't become too difficult
-function randomizeEnemies()
+function Hades2Randomizer.randomizeEnemies()
     local rng = Hades2Randomizer.Data.Rng
     local availableEnemies = DeepCopyTable(Hades2Randomizer.Data.Enemies)
     local availableEliteEnemies = DeepCopyTable(Hades2Randomizer.Data.EliteEnemies)
@@ -143,7 +147,7 @@ function randomizeEnemies()
     end
 
     for key, enemies in pairs(EnemySets) do
-        if tableContains(Hades2Randomizer.Data.IgnoredSets, key) then
+        if Hades2Randomizer.tableContains(Hades2Randomizer.Data.IgnoredSets, key) then
             goto continue
         end
 

@@ -13,7 +13,12 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ]]
-function randomizeBoons()
+
+if not Hades2Randomizer.Config.Enabled then
+    return
+end
+
+function Hades2Randomizer.randomizeBoons()
     LootData = DeepCopyTable(Hades2Randomizer.Data.LootData)
 
     local rng = Hades2Randomizer.Data.Rng

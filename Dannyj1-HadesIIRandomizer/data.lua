@@ -14,6 +14,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ]]
 
+if not Hades2Randomizer.Config.Enabled then
+    return
+end
+
 Hades2Randomizer.Data = {
     RoomCounter = 0,
     Rng = RandomInit(64),
@@ -47,24 +51,24 @@ ModUtil.LoadOnce(function()
 
     -- Load enemy data
     for biome, enemies in pairs(EnemySets) do
-        if tableContains(Hades2Randomizer.Data.IgnoredSets, biome) then
+        if Hades2Randomizer.tableContains(Hades2Randomizer.Data.IgnoredSets, biome) then
             goto continue
         end
 
         for _, enemy in ipairs(enemies) do
             if EnemyData[enemy] ~= nil then
-                if string.find(string.lower(enemy), "miniboss") or tableContains(Hades2Randomizer.Data.MiniBosses, enemy) then
-                    if not tableContains(Hades2Randomizer.Data.MiniBosses, enemy) then
+                if string.find(string.lower(enemy), "miniboss") or Hades2Randomizer.tableContains(Hades2Randomizer.Data.MiniBosses, enemy) then
+                    if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.MiniBosses, enemy) then
                         table.insert(Hades2Randomizer.Data.MiniBosses, enemy)
                     end
                 elseif string.find(string.lower(enemy), "elite") or (EnemyData[enemy].InheritFrom ~= nil
-                        and tableContains(EnemyData[enemy].InheritFrom, "Elite")) or EnemyData[enemy].HealthBuffer ~= nil then
+                        and Hades2Randomizer.tableContains(EnemyData[enemy].InheritFrom, "Elite")) or EnemyData[enemy].HealthBuffer ~= nil then
                     -- Elite enemies generally have armor
-                    if not tableContains(Hades2Randomizer.Data.EliteEnemies, enemy) then
+                    if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.EliteEnemies, enemy) then
                         table.insert(Hades2Randomizer.Data.EliteEnemies, enemy)
                     end
                 else
-                    if not tableContains(Hades2Randomizer.Data.Enemies, enemy) then
+                    if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.Enemies, enemy) then
                         table.insert(Hades2Randomizer.Data.Enemies, enemy)
                     end
                 end
@@ -78,7 +82,7 @@ ModUtil.LoadOnce(function()
     for _, data in pairs(LootData) do
         if data.PriorityUpgrades ~= nil then
             for _, upgrade in ipairs(data.PriorityUpgrades) do
-                if not tableContains(Hades2Randomizer.Data.PriorityUpgrades, upgrade) then
+                if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.PriorityUpgrades, upgrade) then
                     table.insert(Hades2Randomizer.Data.PriorityUpgrades, upgrade)
                 end
             end
@@ -86,7 +90,7 @@ ModUtil.LoadOnce(function()
 
         if data.WeaponUpgrades ~= nil then
             for _, upgrade in ipairs(data.WeaponUpgrades) do
-                if not tableContains(Hades2Randomizer.Data.WeaponUpgrades, upgrade) then
+                if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.WeaponUpgrades, upgrade) then
                     table.insert(Hades2Randomizer.Data.WeaponUpgrades, upgrade)
                 end
             end
@@ -94,7 +98,7 @@ ModUtil.LoadOnce(function()
 
         if data.Traits ~= nil then
             for _, trait in ipairs(data.Traits) do
-                if not tableContains(Hades2Randomizer.Data.Traits, trait) then
+                if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.Traits, trait) then
                     table.insert(Hades2Randomizer.Data.Traits, trait)
                 end
             end
@@ -102,7 +106,7 @@ ModUtil.LoadOnce(function()
 
         if data.Consumables ~= nil then
             for _, consumable in ipairs(data.Consumables) do
-                if not tableContains(Hades2Randomizer.Data.Consumables, consumable) then
+                if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.Consumables, consumable) then
                     table.insert(Hades2Randomizer.Data.Consumables, consumable)
                 end
             end
@@ -110,7 +114,7 @@ ModUtil.LoadOnce(function()
 
         if data.OffersElementalTrait ~= nil then
             for _, trait in ipairs(data.OffersElementalTrait) do
-                if not tableContains(Hades2Randomizer.Data.ElementalTraits, trait) then
+                if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.ElementalTraits, trait) then
                     table.insert(Hades2Randomizer.Data.ElementalTraits, trait)
                 end
             end
@@ -118,14 +122,14 @@ ModUtil.LoadOnce(function()
     end
 end)
 
-function isElite(enemy)
-    return tableContains(Hades2Randomizer.Data.EliteEnemies, enemy)
+function Hades2Randomizer.isElite(enemy)
+    return Hades2Randomizer.tableContains(Hades2Randomizer.Data.EliteEnemies, enemy)
 end
 
-function isMiniBoss(enemy)
-    return tableContains(Hades2Randomizer.Data.MiniBosses, enemy)
+function Hades2Randomizer.isMiniBoss(enemy)
+    return Hades2Randomizer.tableContains(Hades2Randomizer.Data.MiniBosses, enemy)
 end
 
-function isEnemy(enemy)
-    return tableContains(Hades2Randomizer.Data.Enemies, enemy)
+function Hades2Randomizer.isEnemy(enemy)
+    return Hades2Randomizer.tableContains(Hades2Randomizer.Data.Enemies, enemy)
 end

@@ -26,15 +26,15 @@ function StartOver(args)
     EnemyData = DeepCopyTable(Hades2Randomizer.Data.EnemyData)
 
     if Hades2Randomizer.Config.RandomizeEnemies then
-        randomizeEnemies()
+        Hades2Randomizer.randomizeEnemies()
     end
 
     if Hades2Randomizer.Config.ScaleStats then
-        scaleStats()
+        Hades2Randomizer.scaleStats()
     end
 
     if Hades2Randomizer.Config.RandomizeBoons then
-        randomizeBoons()
+        Hades2Randomizer.randomizeBoons()
     end
 
     oStartOver(args)
@@ -45,7 +45,7 @@ function DoUnlockRoomExits(run, room)
     Hades2Randomizer.Data.RoomCounter = Hades2Randomizer.Data.RoomCounter + 1
 
     if Hades2Randomizer.Config.ScaleStats then
-        scaleStats()
+        Hades2Randomizer.scaleStats()
     end
 
     oDoUnlockRoomExits(run, room)

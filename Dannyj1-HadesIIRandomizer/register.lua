@@ -14,12 +14,4 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ]]
 
-local mod = ModUtil.Mod.Register("Hades2Randomizer")
-
-mod.Config = {
-    Enabled = true,
-    RandomizeEnemies = true,
-    RandomizeBoons = true,
-    RandomizeElementalTraits = true,
-    ScaleStats = true
-}
+return ModUtil.Mod.Register("Hades2Randomizer")

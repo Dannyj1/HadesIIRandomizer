@@ -14,16 +14,4 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ]]
 
-function tableContains(table, value)
-    if table == nil then
-        return false
-    end
-
-    for _, v in ipairs(table) do
-        if v == value then
-            return true
-        end
-    end
-
-    return false
-end
+rom.mods['SGG_Modding-DemonDaemon'].auto()

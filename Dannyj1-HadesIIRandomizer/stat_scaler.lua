@@ -20,8 +20,40 @@ local originalMaxMinibossHealth = {}
 local originalMaxMinibossArmor = {}
 local originalDifficulty = {}
 
+if not Hades2Randomizer.Config.Enabled then
+    return
+end
+
+local function restoreOriginalStats()
+    for enemyName, health in pairs(originalMaxHealth) do
+        EnemyData[enemyName].MaxHealth = health
+    end
+
+    for enemyName, armor in pairs(originalMaxArmor) do
+        EnemyData[enemyName].HealthBuffer = armor
+    end
+
+    for enemyName, health in pairs(originalMaxMinibossHealth) do
+        EnemyData[enemyName].MaxHealth = health
+    end
+
+    for enemyName, armor in pairs(originalMaxMinibossArmor) do
+        EnemyData[enemyName].HealthBuffer = armor
+    end
+
+    for enemyName, difficulty in pairs(originalDifficulty) do
+        EnemyData[enemyName].GeneratorData.DifficultyRating = difficulty
+    end
+
+    originalMaxHealth = {}
+    originalMaxArmor = {}
+    originalMaxMinibossHealth = {}
+    originalMaxMinibossArmor = {}
+    originalDifficulty = {}
+end
+
 -- TODO: Add min health and min difficulty (to fix very long encounters)
-function scaleStats()
+function Hades2Randomizer.scaleStats()
     restoreOriginalStats()
 
     local maxHealth = 999999999
@@ -47,7 +79,7 @@ function scaleStats()
     end
 
     for enemyName, values in pairs(EnemyData) do
-        if not isEnemy(enemyName) and not isElite(enemyName) and not isMiniBoss(enemyName) then
+        if not Hades2Randomizer.isEnemy(enemyName) and not Hades2Randomizer.isElite(enemyName) and not Hades2Randomizer.isMiniBoss(enemyName) then
             goto continue
         end
 
@@ -55,7 +87,7 @@ function scaleStats()
             goto continue
         end
 
-        if isMiniBoss(enemyName) then
+        if Hades2Randomizer.isMiniBoss(enemyName) then
             if values.MaxHealth ~= nil then
                 values.MaxHealth = math.min(values.MaxHealth, maxMinibossHealth)
                 originalMaxMinibossHealth[enemyName] = values.MaxHealth
@@ -89,32 +121,4 @@ function scaleStats()
 
         ::continue::
     end
-end
-
-function restoreOriginalStats()
-    for enemyName, health in pairs(originalMaxHealth) do
-        EnemyData[enemyName].MaxHealth = health
-    end
-
-    for enemyName, armor in pairs(originalMaxArmor) do
-        EnemyData[enemyName].HealthBuffer = armor
-    end
-
-    for enemyName, health in pairs(originalMaxMinibossHealth) do
-        EnemyData[enemyName].MaxHealth = health
-    end
-
-    for enemyName, armor in pairs(originalMaxMinibossArmor) do
-        EnemyData[enemyName].HealthBuffer = armor
-    end
-
-    for enemyName, difficulty in pairs(originalDifficulty) do
-        EnemyData[enemyName].GeneratorData.DifficultyRating = difficulty
-    end
-
-    originalMaxHealth = {}
-    originalMaxArmor = {}
-    originalMaxMinibossHealth = {}
-    originalMaxMinibossArmor = {}
-    originalDifficulty = {}
 end

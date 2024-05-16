@@ -1,0 +1,11 @@
+{
+  "name": "Hades II Randomizer",
+  "version_number": "1.0.0",
+  "website_url": "https://github.com/Dannyj1/HadesIIRandomizer/",
+  "description": "Hades II Randomizer is a randomizer mod for the game Hades II. It randomizes certain parts of the game everytime you start a new run. ",
+  "dependencies": [
+    "Hell2Modding-Hell2Modding-1.0.22",
+    "SGG_Modding-DemonDaemon-1.0.1",
+    "SGG_Modding-ModUtil-3.1.0"
+  ]
+}
