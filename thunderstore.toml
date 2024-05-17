@@ -4,7 +4,7 @@ schemaVersion = "0.0.1"
 
 [package]
 namespace = "Dannyj1"
-name = "Hades II Randomizer"
+name = "Hades_II_Randomizer"
 versionNumber = "1.0.0"
 description = "Hades II Randomizer is a mod that randomizes certain parts of the game everytime you start a new run."
 websiteUrl = "https://github.com/Dannyj1/HadesIIRandomizer/"
