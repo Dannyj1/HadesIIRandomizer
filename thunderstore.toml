@@ -29,7 +29,7 @@ target = "./LICENSE"
 
 [[build.copy]]
 source = "./src"
-target = "./plugins"
+target = "./"
 
 
 [publish]
