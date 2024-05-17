@@ -36,11 +36,12 @@ Hades2Randomizer.Data = {
     Enemies = {"LightRanged", "SatyrCultist"},
     EliteEnemies = {},
     -- Most of the minibosses will be filled dynamically, but they don't all have the word "miniboss" in their name or are defined in EnemySets
-    MiniBosses = {"Treant", "FogEmitter_Elite", "Vampire", "WaterUnitMiniboss", "CrawlerMiniboss",
+    MiniBosses = {"Treant", "FogEmitter_Elite", "Vampire", "WaterUnitMiniboss",
                   "SatyrRatCatcher_Miniboss", "GoldElemental_MiniBoss"},
 
     IgnoredSets = {"TestEnemies", "AllEliteAttributes", "RangedOnlyEliteAttributes", "ShadeOnlyEliteAttributes",
-                   "EliteAttributesRunBanOptions", "BiomeP"}
+                   "EliteAttributesRunBanOptions", "BiomeP", "ManaUpgrade"},
+    IgnoredEnemies = {"CrawlerMiniboss"}
 }
 
 ModUtil.LoadOnce(function()
@@ -57,6 +58,14 @@ ModUtil.LoadOnce(function()
 
         for _, enemy in ipairs(enemies) do
             if EnemyData[enemy] ~= nil then
+                if EnemyData[enemy].IsBoss ~= nil and EnemyData[enemy].IsBoss == false then
+                    goto continue2
+                end
+
+                if Hades2Randomizer.tableContains(Hades2Randomizer.Data.IgnoredEnemies, enemy) then
+                    goto continue2
+                end
+
                 if string.find(string.lower(enemy), "miniboss") or Hades2Randomizer.tableContains(Hades2Randomizer.Data.MiniBosses, enemy) then
                     if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.MiniBosses, enemy) then
                         table.insert(Hades2Randomizer.Data.MiniBosses, enemy)
@@ -73,13 +82,19 @@ ModUtil.LoadOnce(function()
                     end
                 end
             end
+
+            ::continue2::
         end
 
         ::continue::
     end
 
     -- Load LootTable/Boon data
-    for _, data in pairs(LootData) do
+    for key, data in pairs(LootData) do
+        if Hades2Randomizer.tableContains(Hades2Randomizer.Data.IgnoredSets, key) then
+            goto continue
+        end
+
         if data.PriorityUpgrades ~= nil then
             for _, upgrade in ipairs(data.PriorityUpgrades) do
                 if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.PriorityUpgrades, upgrade) then
@@ -119,6 +134,8 @@ ModUtil.LoadOnce(function()
                 end
             end
         end
+
+        ::continue::
     end
 end)
 
