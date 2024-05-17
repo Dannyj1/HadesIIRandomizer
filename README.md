@@ -11,6 +11,8 @@ Please keep in mind that this mod is in it's early stages, so there might be iss
 - **Elemental Traits**: The elemental traits (water, fire, etc.) offered by the gods are randomized. This affects the way you should approach infusion boons.
 
 ## Prerequisites
+**NOTE**: These instructions are NOT for the Thunderstore version of the mod. If you are using the Thunderstore version, you will need to manually install the dependencies or use the fork of the R2modman that can be found in the [Hades Modding Discord](https://discord.gg/KuMbyrN).
+
 Before installing the mod, make sure you have the following installed:
 1. The latest version of [ModImporter](https://www.nexusmods.com/hades2/mods/1): https://www.nexusmods.com/hades2/mods/1
 2. The latest version of [ModUtil](https://github.com/SGG-Modding/ModUtil/releases): https://github.com/SGG-Modding/ModUtil/releases
@@ -18,6 +20,9 @@ Before installing the mod, make sure you have the following installed:
 Earlier versions of ModImport and ModUtil might not support Hades II yet, so make sure you are using a recent version!
 
 ## Installation
+**NOTE**: These instructions are NOT for the Thunderstore version of the mod. If you are using the Thunderstore version, you will need to manually install the dependencies or use the fork of the R2modman that can be found in the [Hades Modding Discord](https://discord.gg/KuMbyrN).
+
+
 1. Download the latest release from the [releases page](https://github.com/Dannyj1/HadesIIRandomizer/releases)
 2. Extract the contents of the zip file.
 3. In the `Content` folder of your Hades II installation folder (Usually `C:\Program Files (x86)\Steam\steamapps\common\Hades II\Content`), create a mods folder if it doesn't exist yet.
