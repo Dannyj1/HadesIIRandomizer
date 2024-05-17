@@ -28,7 +28,7 @@ function Hades2Randomizer.randomizeEnemies()
 
     DebugPrint({ Text = "Randomizing Enemies..." })
 
-    for enemyName, values in pairs(EnemyData) do
+    for _, values in pairs(EnemyData) do
         -- To fix the spawn locations of certain enemies after randomizing them to a location other than their vanilla location, remove the RequiredSpawnPoint and make it preferred instead.
         if values.RequiredSpawnPoint ~= nil then
             values.PreferredSpawnPoint = values.RequiredSpawnPoint
@@ -38,6 +38,10 @@ function Hades2Randomizer.randomizeEnemies()
         -- Disable intro encounters as they mess with the difficulty
         if values.IntroEncounterName ~= nil then
             values.IntroEncounterName = nil
+        end
+
+        if values.UseActivatePresentation ~= nil then
+            values.UseActivatePresentation = false
         end
     end
 
