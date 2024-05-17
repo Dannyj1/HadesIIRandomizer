@@ -107,7 +107,6 @@ function Hades2Randomizer.randomizeBoons()
                 if traitAmount > 0 then
                     if data.OffersElementalTrait == nil then
                         data.OffersElementalTrait = {}
-                        DebugPrint({Text = "Elemental Trait: " .. key .. " -> No Elemental Traits"})
                     end
 
                     local availableElementalTraits = DeepCopyTable(Hades2Randomizer.Data.ElementalTraits)
@@ -127,6 +126,7 @@ function Hades2Randomizer.randomizeBoons()
                         table.remove(availableElementalTraits, randomIndex)
                     end
                 else
+                    DebugPrint({Text = "Elemental Trait: " .. key .. " -> No Elemental Traits"})
                     data.OffersElementalTrait = nil
                 end
             end

@@ -40,7 +40,7 @@ Hades2Randomizer.Data = {
                   "SatyrRatCatcher_Miniboss", "GoldElemental_MiniBoss"},
 
     IgnoredSets = {"TestEnemies", "AllEliteAttributes", "RangedOnlyEliteAttributes", "ShadeOnlyEliteAttributes",
-                   "EliteAttributesRunBanOptions", "BiomeP"}
+                   "EliteAttributesRunBanOptions", "BiomeP", "ManaUpgrade"}
 }
 
 ModUtil.LoadOnce(function()
@@ -79,7 +79,11 @@ ModUtil.LoadOnce(function()
     end
 
     -- Load LootTable/Boon data
-    for _, data in pairs(LootData) do
+    for key, data in pairs(LootData) do
+        if Hades2Randomizer.tableContains(Hades2Randomizer.Data.IgnoredSets, key) then
+            goto continue
+        end
+
         if data.PriorityUpgrades ~= nil then
             for _, upgrade in ipairs(data.PriorityUpgrades) do
                 if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.PriorityUpgrades, upgrade) then
@@ -119,6 +123,8 @@ ModUtil.LoadOnce(function()
                 end
             end
         end
+
+        ::continue::
     end
 end)
 
