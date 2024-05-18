@@ -8,6 +8,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Fixed
-- Fixed some enemies appearing as blacked out or having missing textures.
+- Fixed some enemies being blacked out or having missing textures after being randomized outside of their usual area (mainly happened to surface enemies).
 - Fixed an issue where some ability graphics were glitched after being randomized.
 - No longer randomize the CrawlerMiniboss (uh-oh) as it does not work outside of it's normal room.
