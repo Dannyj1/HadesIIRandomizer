@@ -41,7 +41,8 @@ Hades2Randomizer.Data = {
 
     IgnoredSets = {"TestEnemies", "AllEliteAttributes", "RangedOnlyEliteAttributes", "ShadeOnlyEliteAttributes",
                    "EliteAttributesRunBanOptions", "BiomeP", "ManaUpgrade"},
-    IgnoredEnemies = {"CrawlerMiniboss"}
+    IgnoredEnemies = {"CrawlerMiniboss"},
+    UpgradePackages = {}
 }
 
 ModUtil.LoadOnce(function()
@@ -95,10 +96,14 @@ ModUtil.LoadOnce(function()
             goto continue
         end
 
+        local keySplit = Hades2Randomizer.splitOnCapitalLetters(key)
+        local packageName = keySplit[1] .. "Upgrade"
+
         if data.PriorityUpgrades ~= nil then
             for _, upgrade in ipairs(data.PriorityUpgrades) do
                 if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.PriorityUpgrades, upgrade) then
                     table.insert(Hades2Randomizer.Data.PriorityUpgrades, upgrade)
+                    Hades2Randomizer.Data.UpgradePackages[upgrade] = packageName
                 end
             end
         end
@@ -107,6 +112,7 @@ ModUtil.LoadOnce(function()
             for _, upgrade in ipairs(data.WeaponUpgrades) do
                 if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.WeaponUpgrades, upgrade) then
                     table.insert(Hades2Randomizer.Data.WeaponUpgrades, upgrade)
+                    Hades2Randomizer.Data.UpgradePackages[upgrade] = packageName
                 end
             end
         end
@@ -115,6 +121,7 @@ ModUtil.LoadOnce(function()
             for _, trait in ipairs(data.Traits) do
                 if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.Traits, trait) then
                     table.insert(Hades2Randomizer.Data.Traits, trait)
+                    Hades2Randomizer.Data.UpgradePackages[trait] = packageName
                 end
             end
         end
@@ -123,6 +130,7 @@ ModUtil.LoadOnce(function()
             for _, consumable in ipairs(data.Consumables) do
                 if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.Consumables, consumable) then
                     table.insert(Hades2Randomizer.Data.Consumables, consumable)
+                    Hades2Randomizer.Data.UpgradePackages[consumable] = packageName
                 end
             end
         end
@@ -131,12 +139,15 @@ ModUtil.LoadOnce(function()
             for _, trait in ipairs(data.OffersElementalTrait) do
                 if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.ElementalTraits, trait) then
                     table.insert(Hades2Randomizer.Data.ElementalTraits, trait)
+                    Hades2Randomizer.Data.UpgradePackages[trait] = packageName
                 end
             end
         end
 
         ::continue::
     end
+
+    DebugPrintTable(Hades2Randomizer.Data.UpgradePackages, true, 0)
 end)
 
 function Hades2Randomizer.isElite(enemy)

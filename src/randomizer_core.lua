@@ -40,6 +40,26 @@ function StartOver(args)
     oStartOver(args)
 end
 
+local oLoadMap = LoadMap
+function LoadMap(argTable)
+    oLoadMap(argTable)
+
+    -- Deal with missing textures by loading the packages for all area, loading packages for equipped boons and keeping them loaded
+    LoadPackages({ Name = "Erebus" })
+    LoadPackages({ Name = "Oceanus" })
+    LoadPackages({ Name = "Fields" })
+    LoadPackages({ Name = "Tartarus" })
+    LoadPackages({ Name = "Ephyra" })
+    LoadPackages({ Name = "Thessaly" })
+    LoadPackages({ Name = "Asphodel" })
+
+    for _, trait in pairs(CurrentRun.Hero.Traits) do
+        if Hades2Randomizer.Data.UpgradePackages[trait.Name] ~= nil then
+            LoadPackages({ Name = Hades2Randomizer.Data.UpgradePackages[trait.Name] })
+        end
+    end
+end
+
 local oDoUnlockRoomExits = DoUnlockRoomExits
 function DoUnlockRoomExits(run, room)
     Hades2Randomizer.Data.RoomCounter = Hades2Randomizer.Data.RoomCounter + 1

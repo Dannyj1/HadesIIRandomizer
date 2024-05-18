@@ -39,10 +39,6 @@ function Hades2Randomizer.randomizeEnemies()
         if values.IntroEncounterName ~= nil then
             values.IntroEncounterName = nil
         end
-
-        if values.UseActivatePresentation ~= nil then
-            values.UseActivatePresentation = false
-        end
     end
 
     -- Randomize enemies

@@ -31,3 +31,26 @@ function Hades2Randomizer.tableContains(table, value)
 
     return false
 end
+
+function Hades2Randomizer.splitOnCapitalLetters(str)
+    local parts = {}
+    local currentPart = ""
+
+    for i = 1, #str do
+        local char = string.sub(str, i, i)
+        if char.match(char, "%u") then
+            if currentPart ~= "" then
+                table.insert(parts, currentPart)
+            end
+            currentPart = char
+        else
+            currentPart = currentPart .. char
+        end
+    end
+
+    if currentPart ~= "" then
+        table.insert(parts, currentPart)
+    end
+
+    return parts
+end

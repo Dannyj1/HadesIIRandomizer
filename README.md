@@ -40,9 +40,7 @@ The mod comes with a `config.lua` file that allows you to change certain setting
 - `ScaleStats`: Scales enemy and miniboss stats in the earlier areas, so you do not have to spent ages on a single enemy. Default: `true`.
 
 ## Known Issues
-- Some enemies are blacked out or have strange textures when spawning in a different area than their normal area. I will try to fix this, but I am not sure if it is possible.
 - Some encounters in later areas might be a bit too long and have a lot of enemies.
-- Some ability graphics are glitched after being randomized. Not sure how to fix this yet or if it can be fixed at all.
 
 ## Roadmap
 - See if randomizing enemies spawned by Chronos and Scylla is fun or not.

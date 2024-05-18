@@ -31,7 +31,6 @@ target = "./LICENSE"
 source = "./src"
 target = "./"
 
-
 [publish]
 repository = "https://thunderstore.io"
 communities = [ "hades-ii", ]
