@@ -7,7 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.2] - 2024-05-18
+
 ### Fixed
+
 - Fixed some enemies being blacked out or having missing textures after being randomized outside of their usual area (mainly happened to surface enemies).
 - Fixed an issue where some ability graphics were glitched after being randomized.
 - No longer randomize the CrawlerMiniboss (uh-oh) as it does not work outside of it's normal room.
+
+[unreleased]: https://github.com/Dannyj1/HadesIIRandomizer/compare/1.0.2...HEAD
+[1.0.2]: https://github.com/Dannyj1/HadesIIRandomizer/compare/bcbdcf426c9c2ce564460613c12714bc6a9bb6cd...1.0.2
