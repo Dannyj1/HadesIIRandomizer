@@ -35,7 +35,7 @@ Earlier versions of ModImport and ModUtil might not support Hades II yet, so mak
 The mod comes with a `config.lua` file that allows you to change certain settings. The following settings are available:
 - `Enabled`: Set to `true` to enable the mod, set to `false` to disable the mod. Default: `true`.
 - `RandomizeEnemies`: Randomizes the enemies as described above. Default: `true`.
-- `RandomizeBoons`: Randomizes the boons as described above. Default: `true`.
+- `RandomizeBoonOfferings`: Randomizes the boon offerings as described above. Default: `true`.
 - `RandomizeElementalTraits`: Randomizes the elemental traits as described above. Default: `true`.
 - `ScaleStats`: Scales enemy and miniboss stats in the earlier areas, so you do not have to spent ages on a single enemy. Default: `true`.
 

@@ -32,6 +32,7 @@ Hades2Randomizer.Data = {
     Traits = {},
     Consumables = {},
     ElementalTraits = {},
+    Keepsakes = {},
 
     Enemies = {"LightRanged", "SatyrCultist"},
     EliteEnemies = {},
@@ -147,7 +148,11 @@ ModUtil.LoadOnce(function()
         ::continue::
     end
 
-    DebugPrintTable(Hades2Randomizer.Data.UpgradePackages, true, 0)
+    for keepsake, _ in pairs(TraitSetData.Keepsakes) do
+        if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.Keepsakes, keepsake) then
+            table.insert(Hades2Randomizer.Data.Keepsakes, keepsake)
+        end
+    end
 end)
 
 function Hades2Randomizer.isElite(enemy)

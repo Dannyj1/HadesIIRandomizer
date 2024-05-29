@@ -33,8 +33,12 @@ function StartOver(args)
         Hades2Randomizer.scaleStats()
     end
 
-    if Hades2Randomizer.Config.RandomizeBoons then
-        Hades2Randomizer.randomizeBoons()
+    if Hades2Randomizer.Config.RandomizeBoonOfferings then
+        Hades2Randomizer.randomizeBoonOfferings()
+    end
+
+    if Hades2Randomizer.Config.RandomizeKeepsake then
+        Hades2Randomizer.randomizeKeepsakes()
     end
 
     oStartOver(args)
@@ -44,7 +48,7 @@ local oLoadMap = LoadMap
 function LoadMap(argTable)
     oLoadMap(argTable)
 
-    -- Deal with missing textures by loading the packages for all area, loading packages for equipped boons and keeping them loaded
+    -- Deal with missing textures by loading the packages for all area and loading packages for equipped boons and keeping them loaded
     LoadPackages({ Name = "Erebus" })
     LoadPackages({ Name = "Oceanus" })
     LoadPackages({ Name = "Fields" })

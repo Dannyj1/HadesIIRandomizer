@@ -18,7 +18,7 @@ if not Hades2Randomizer.Config.Enabled then
     return
 end
 
-function Hades2Randomizer.randomizeBoons()
+function Hades2Randomizer.randomizeBoonOfferings()
     LootData = DeepCopyTable(Hades2Randomizer.Data.LootData)
 
     local rng = Hades2Randomizer.Data.Rng
