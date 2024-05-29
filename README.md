@@ -13,6 +13,8 @@ Please keep in mind that this mod is in it's early stages, so there might be iss
 - **Weapon**: The weapon you start with is randomized. This can be any weapon in the game, including the ones you have not unlocked yet.
 - **Weapon Aspect**: The aspect of the weapon you start with is randomized. This can be any aspect of the weapon you have chosen, including the ones you have not unlocked yet.
 
+Some of these features are disabled by default and can be enabled in the config. See [Configuration](#configuration) for more information.
+
 ## Prerequisites
 **NOTE**: These instructions are NOT for the Thunderstore version of the mod. If you are using the Thunderstore version, you will need to manually install the dependencies or use the fork of the r2modman that can be found [here](https://github.com/xiaoxiao921/r2modmanPlus/releases).
 
