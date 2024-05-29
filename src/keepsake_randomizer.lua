@@ -1,5 +1,6 @@
 function Hades2Randomizer.randomizeKeepsakes()
-    local randomIndex = RandomInt(1, #Hades2Randomizer.Data.Keepsakes)
+    local rng = Hades2Randomizer.Data.Rng
+    local randomIndex = RandomInt(1, #Hades2Randomizer.Data.Keepsakes, rng)
     local randomKeepsake = Hades2Randomizer.Data.Keepsakes[randomIndex]
 
     DebugPrint({Text = "Randomizing Keepsake: " .. randomKeepsake})

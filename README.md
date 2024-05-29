@@ -9,9 +9,12 @@ Please keep in mind that this mod is in it's early stages, so there might be iss
 - **Enemies**: Enemies, elite enemies and minibosses are randomized. This means that you can encounter an enemy from, for example, the Fields of Mourning in Erebus or even surface enemies in the underworld.
 - **Boons**: Boons/Offerings from gods are randomized. This means that, for example, Poseidon can offer upgrades from Aphrodite or Demeter instead of the usual Poseidon boons. Boons are only randomized at the start of the run, so a god will keep offering the same boons for the whole run, until you start a new run.
 - **Elemental Traits**: The elemental traits (water, fire, etc.) offered by the gods are randomized. This affects the way you should approach infusion boons.
+- **Keepsake**: The keepsake you start with is randomized. This can be any keepsake in the game, including the ones you have not unlocked yet.
+- **Weapon**: The weapon you start with is randomized. This can be any weapon in the game, including the ones you have not unlocked yet.
+- **Weapon Aspect**: The aspect of the weapon you start with is randomized. This can be any aspect of the weapon you have chosen, including the ones you have not unlocked yet.
 
 ## Prerequisites
-**NOTE**: These instructions are NOT for the Thunderstore version of the mod. If you are using the Thunderstore version, you will need to manually install the dependencies or use the fork of the R2modman that can be found [here](https://github.com/xiaoxiao921/r2modmanPlus/releases).
+**NOTE**: These instructions are NOT for the Thunderstore version of the mod. If you are using the Thunderstore version, you will need to manually install the dependencies or use the fork of the r2modman that can be found [here](https://github.com/xiaoxiao921/r2modmanPlus/releases).
 
 Before installing the mod, make sure you have the following installed:
 1. The latest version of [ModImporter](https://www.nexusmods.com/hades2/mods/1): https://www.nexusmods.com/hades2/mods/1
@@ -20,8 +23,9 @@ Before installing the mod, make sure you have the following installed:
 Earlier versions of ModImport and ModUtil might not support Hades II yet, so make sure you are using a recent version!
 
 ## Installation
-**NOTE**: These instructions are NOT for the Thunderstore version of the mod. If you are using the Thunderstore version, you will need to manually install the dependencies or use the fork of the R2modman that can be found [here](https://github.com/xiaoxiao921/r2modmanPlus/releases).
+**NOTE**: The instructions below are for ModImporter (or the Nexusmods version). These instructions are NOT for the Thunderstore version of the mod. It is recommended to use the ThunderStore version of this mod as it's easier to install. If you are using the Thunderstore version, you will need to use the fork of the r2modman that can be found [here](https://github.com/xiaoxiao921/r2modmanPlus/releases).
 
+**NOTE 2**: Once r2modman (not the fork) supports Hades II and Hell2Modding stabilizes/matures, ModImporter will likely no longer be supported!
 
 1. Download the latest release from the [releases page](https://github.com/Dannyj1/HadesIIRandomizer/releases)
 2. Extract the contents of the zip file.
@@ -32,12 +36,16 @@ Earlier versions of ModImport and ModUtil might not support Hades II yet, so mak
 7. Enjoy!
 
 ## Configuration
+**NOTE**: When using Hell2Modding, the configuration file is located in the ReturnOfModding/config folder of your r2modman data folder under the name `Dannyj1-Hades_II_Randomizer.cfg`. 
+
 The mod comes with a `config.lua` file that allows you to change certain settings. The following settings are available:
 - `Enabled`: Set to `true` to enable the mod, set to `false` to disable the mod. Default: `true`.
 - `RandomizeEnemies`: Randomizes the enemies as described above. Default: `true`.
 - `RandomizeBoonOfferings`: Randomizes the boon offerings as described above. Default: `true`.
 - `RandomizeElementalTraits`: Randomizes the elemental traits as described above. Default: `true`.
 - `ScaleStats`: Scales enemy and miniboss stats in the earlier areas, so you do not have to spent ages on a single enemy. Default: `true`.
+- `RandomizeKeepsake`: Randomizes the keepsake you start with. Default: `false`.
+- `RandomizeWeapon`: Randomizes the weapon and the weapon's aspect you start with. Default: `false`.
 
 ## Known Issues
 - Some encounters in later areas might be a bit too long and have a lot of enemies.
@@ -46,9 +54,6 @@ The mod comes with a `config.lua` file that allows you to change certain setting
 - See if randomizing enemies spawned by Chronos and Scylla is fun or not.
 - Add a "minimum health" scaling for enemies in later areas to up the difficulty.
 - Randomize rooms
-- Randomize equipped weapon
-- Randomize weapon aspect
-- Randomize equipped keepsake
 - Randomize Arcana cards
 - Randomize music
 - See what else can be randomized

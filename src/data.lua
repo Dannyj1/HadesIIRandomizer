@@ -33,6 +33,8 @@ Hades2Randomizer.Data = {
     Consumables = {},
     ElementalTraits = {},
     Keepsakes = {},
+    Weapons = {},
+    Aspects = {},
 
     Enemies = {"LightRanged", "SatyrCultist"},
     EliteEnemies = {},
@@ -151,6 +153,24 @@ ModUtil.LoadOnce(function()
     for keepsake, _ in pairs(TraitSetData.Keepsakes) do
         if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.Keepsakes, keepsake) then
             table.insert(Hades2Randomizer.Data.Keepsakes, keepsake)
+        end
+    end
+
+    for _, weapon in pairs(WeaponSets.HeroPrimaryWeapons) do
+        if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.Weapons, weapon) then
+            table.insert(Hades2Randomizer.Data.Weapons, weapon)
+        end
+    end
+
+    for aspectName, data in pairs(TraitSetData.Aspects) do
+        local requiredWeapon = data.RequiredWeapon
+
+        if requiredWeapon ~= nil then
+            if Hades2Randomizer.Data.Aspects[requiredWeapon] == nil then
+                Hades2Randomizer.Data.Aspects[requiredWeapon] = {}
+            end
+
+            table.insert(Hades2Randomizer.Data.Aspects[requiredWeapon], aspectName)
         end
     end
 end)

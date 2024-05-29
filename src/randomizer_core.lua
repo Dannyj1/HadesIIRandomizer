@@ -41,6 +41,10 @@ function StartOver(args)
         Hades2Randomizer.randomizeKeepsakes()
     end
 
+    if Hades2Randomizer.Config.RandomizeWeapon then
+        Hades2Randomizer.randomizeWeapon()
+    end
+
     oStartOver(args)
 end
 

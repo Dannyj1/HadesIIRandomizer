@@ -11,7 +11,7 @@ websiteUrl = "https://github.com/Dannyj1/HadesIIRandomizer/"
 containsNsfwContent = false
 
 [package.dependencies]
-SGG_Modding-DemonDaemon = "1.0.1"
+SGG_Modding-DemonDaemon = "1.1.0"
 SGG_Modding-ModUtil = "3.1.1"
 
 [build]

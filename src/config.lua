@@ -20,7 +20,8 @@ Hades2Randomizer.Config = {
     RandomizeBoonOfferings = true,
     RandomizeElementalTraits = true,
     ScaleStats = true,
-    RandomizeKeepsake = false
+    RandomizeKeepsake = false,
+    RandomizeWeapon = false,
 }
 
 return Hades2Randomizer.Config

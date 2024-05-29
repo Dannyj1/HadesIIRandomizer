@@ -8,9 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Added keepsake randomization at the start of a new run (disabled by default, can be enabled in the config file).
+- Added weapon and aspect randomization at the start of a new run (disabled by default, can be enabled in the config file).
 
 ### Changed
 - Renamed `RandomizeBoons` to `RandomizeBoonOfferings` in the config for clarity.
+- DemonDaemon dependency version requirement updated to 1.1.0, coming with a new config system.
 
 ## [1.0.2] - 2024-05-18
 
