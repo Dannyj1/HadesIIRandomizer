@@ -59,6 +59,7 @@ The mod comes with a `config.lua` file that allows you to change certain setting
 - Randomize Arcana cards
 - Randomize music
 - See what else can be randomized
+- Add a UI in which settings can be changed in-game, without restarts. This will probably only happen once a UI library gets released.
 
 ## I found a bug or my game crashed, what do I do?
 Please create an issue ([click here](https://github.com/Dannyj1/HadesIIRandomizer/issues/new/choose)) with the following details:
