@@ -151,7 +151,7 @@ ModUtil.LoadOnce(function()
     end
 
     for keepsake, _ in pairs(TraitSetData.Keepsakes) do
-        if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.Keepsakes, keepsake) then
+        if not string.match(keepsake, "Base") and not Hades2Randomizer.tableContains(Hades2Randomizer.Data.Keepsakes, keepsake) then
             table.insert(Hades2Randomizer.Data.Keepsakes, keepsake)
         end
     end
