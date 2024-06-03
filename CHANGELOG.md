@@ -6,26 +6,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-### Fixed
+### Changed
+- Updated ModUtil dependency required version to 4.0.0
 
+### Fixed
 - Fixed "base" keepsakes being randomized, causing the game to crash
 
 ## [1.1.0] - 2024-05-29
 
 ### Added
-
 - Added keepsake randomization at the start of a new run (disabled by default, can be enabled in the config file).
 - Added weapon and aspect randomization at the start of a new run (disabled by default, can be enabled in the config file).
 
 ### Changed
-
 - Renamed `RandomizeBoons` to `RandomizeBoonOfferings` in the config for clarity.
 - DemonDaemon dependency version requirement updated to 1.1.0, coming with a new config system.
 
 ## [1.0.2] - 2024-05-18
 
 ### Fixed
-
 - Fixed some enemies being blacked out or having missing textures after being randomized outside of their usual area (mainly happened to surface enemies).
 - Fixed an issue where some ability graphics were glitched after being randomized.
 - No longer randomize the CrawlerMiniboss (uh-oh) as it does not work outside of it's normal room.
