@@ -45,6 +45,10 @@ function StartOver(args)
         Hades2Randomizer.randomizeWeapon()
     end
 
+    if Hades2Randomizer.Config.RandomizeArcanaCards then
+        Hades2Randomizer.randomizeEquippedCards()
+    end
+
     oStartOver(args)
 end
 

@@ -22,6 +22,8 @@ Hades2Randomizer.Config = {
     ScaleStats = true,
     RandomizeKeepsake = false,
     RandomizeWeapon = false,
+    RandomizeArcanaCards = false,
+    ArcanaCardEquipChance = 50,
 }
 
 return Hades2Randomizer.Config
