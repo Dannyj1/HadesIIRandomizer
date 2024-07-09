@@ -19,7 +19,9 @@ function Hades2Randomizer.randomizeKeepsakes()
     local randomIndex = RandomInt(1, #Hades2Randomizer.Data.Keepsakes, rng)
     local randomKeepsake = Hades2Randomizer.Data.Keepsakes[randomIndex]
 
-    DebugPrint({Text = "Randomizing Keepsake: " .. randomKeepsake})
+    if Hades2Randomizer.Config.Debug then
+        DebugPrint({Text = "Randomizing Keepsake: " .. randomKeepsake})
+    end
 
     if GameState.LastAwardTrait ~= nil and HeroHasTrait(GameState.LastAwardTrait) then
         UnequipKeepsake(CurrentRun.Hero, GameState.LastAwardTrait)

@@ -16,12 +16,14 @@ limitations under the License.
 
 Hades2Randomizer.Config = {
     Enabled = true,
+    Debug = false,
     RandomizeEnemies = true,
     RandomizeBoonOfferings = true,
     RandomizeElementalTraits = true,
     ScaleStats = true,
     RandomizeKeepsake = false,
     RandomizeWeapon = false,
+    RandomizeEnemyWeapons = false,
 }
 
 return Hades2Randomizer.Config

@@ -22,8 +22,10 @@ function Hades2Randomizer.randomizeWeapon()
     local randomAspectIndex = RandomInt(1, #aspects, rng)
     local randomAspect = aspects[randomAspectIndex]
 
-    DebugPrint({ Text = "Randomizing weapon: " .. randomWeapon })
-    DebugPrint({ Text = "Randomizing aspect: " .. randomAspect })
+    if Hades2Randomizer.Config.Debug then
+        DebugPrint({ Text = "Randomizing weapon: " .. randomWeapon })
+        DebugPrint({ Text = "Randomizing aspect: " .. randomAspect })
+    end
 
     GameState.LastWeaponUpgradeName[randomWeapon] = randomAspect
 

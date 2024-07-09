@@ -35,6 +35,7 @@ Hades2Randomizer.Data = {
     Keepsakes = {},
     Weapons = {},
     Aspects = {},
+    WeaponOptions = {},
 
     Enemies = {"LightRanged", "SatyrCultist"},
     EliteEnemies = {},
@@ -43,10 +44,19 @@ Hades2Randomizer.Data = {
                   "SatyrRatCatcher_Miniboss", "GoldElemental_MiniBoss"},
 
     IgnoredSets = {"TestEnemies", "AllEliteAttributes", "RangedOnlyEliteAttributes", "ShadeOnlyEliteAttributes",
-                   "EliteAttributesRunBanOptions", "BiomeP", "ManaUpgrade"},
+                   "EliteAttributesRunBanOptions", "BiomeP", "ManaUpgrade", "NPC_Artemis_Field_01"},
     IgnoredEnemies = {"CrawlerMiniboss"},
+    IgnoredWeaponOptions = {"HecateSplit1", "HecateSplit2", "HecateSplit3", "WaterUnitDive", "SirenDrummerBeatCoralFar"},
     UpgradePackages = {}
 }
+
+local function isWeaponOptionBlacklisted(weaponName)
+    return Hades2Randomizer.tableContains(Hades2Randomizer.Data.WeaponOptions, weaponName)
+            or Hades2Randomizer.tableContains(Hades2Randomizer.Data.IgnoredWeaponOptions, weaponName)
+            or string.match(weaponName, "Sheep") or string.match(weaponName, "Passive")
+            or string.match(weaponName, "Base") or string.match(weaponName, "Trap")
+            or string.match(weaponName, "Test") or string.match(weaponName, "OilPuddle")
+end
 
 ModUtil.LoadOnce(function()
     Hades2Randomizer.Data.EncounterData = DeepCopyTable(EncounterData)
@@ -88,6 +98,54 @@ ModUtil.LoadOnce(function()
             end
 
             ::continue2::
+        end
+
+        ::continue::
+    end
+
+    -- Load WeaponOptions
+    -- TODO: See if traps can be randomized without breaking everything. Maybe only randomize traps weapons with trap weapons
+    for enemyName, data in pairs(EnemyData) do
+        if Hades2Randomizer.tableContains(Hades2Randomizer.Data.IgnoredEnemies, enemyName) or Hades2Randomizer.tableContains(Hades2Randomizer.Data.IgnoredSets, enemyName) then
+            goto continue
+        end
+
+        if data.InheritFrom ~= nil and (Hades2Randomizer.tableContains(data.InheritFrom, "NPC_Neutral")
+                or Hades2Randomizer.tableContains(data.InheritFrom, "NPC_Giftable")
+                or Hades2Randomizer.tableContains(data.InheritFrom, "BaseTrap")) then
+            goto continue
+        end
+
+        if string.match(string.lower(enemyName), "base") then
+            goto continue
+        end
+
+        if data.WeaponOptions ~= nil then
+            for _, weaponName in ipairs(data.WeaponOptions) do
+                if not isWeaponOptionBlacklisted(weaponName) then
+                    table.insert(Hades2Randomizer.Data.WeaponOptions, weaponName)
+                end
+            end
+        end
+
+        if data.AIStages ~= nil then
+            for _, stage in ipairs(data.AIStages) do
+                if stage.MidPhaseWeapons ~= nil then
+                    for _, weaponName in ipairs(stage.MidPhaseWeapons) do
+                        if not isWeaponOptionBlacklisted(weaponName) then
+                            table.insert(Hades2Randomizer.Data.WeaponOptions, weaponName)
+                        end
+                    end
+                end
+
+                if stage.EquipWeapons ~= nil then
+                    for _, weaponName in ipairs(stage.EquipWeapons) do
+                        if not isWeaponOptionBlacklisted(weaponName) then
+                            table.insert(Hades2Randomizer.Data.WeaponOptions, weaponName)
+                        end
+                    end
+                end
+            end
         end
 
         ::continue::

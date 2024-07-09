@@ -27,7 +27,9 @@ function Hades2Randomizer.randomizeBoonOfferings()
     local availableConsumables = DeepCopyTable(Hades2Randomizer.Data.Consumables)
     local mapping = {}
 
-    DebugPrint({Text = "Randomizing Boons..."})
+    if Hades2Randomizer.Config.Debug then
+        DebugPrint({Text = "Randomizing Boons..."})
+    end
 
     -- Randomize boon upgrades
     for _, data in pairs(Hades2Randomizer.Data.WeaponUpgrades) do
@@ -69,8 +71,10 @@ function Hades2Randomizer.randomizeBoonOfferings()
         table.remove(availableConsumables, randomIndex)
     end
 
-    DebugPrint({Text = "Boon Mapping:"})
-    DebugPrintTable(mapping, true, 0)
+    if Hades2Randomizer.Config.Debug then
+        DebugPrint({Text = "Boon Mapping:"})
+        DebugPrintTable(mapping, true, 0)
+    end
 
     -- Apply randomized boons to the LootData
     for key, data in pairs(LootData) do
@@ -120,13 +124,18 @@ function Hades2Randomizer.randomizeBoonOfferings()
                             randomIndex = RandomInt(1, #availableElementalTraits, rng)
                         end
 
-                        DebugPrint({Text = "Elemental Trait: " .. key .. " -> " .. availableElementalTraits[randomIndex]})
+                        if Hades2Randomizer.Config.Debug then
+                            DebugPrint({Text = "Elemental Trait: " .. key .. " -> " .. availableElementalTraits[randomIndex]})
+                        end
 
                         table.insert(data.OffersElementalTrait, availableElementalTraits[randomIndex])
                         table.remove(availableElementalTraits, randomIndex)
                     end
                 else
-                    DebugPrint({Text = "Elemental Trait: " .. key .. " -> No Elemental Traits"})
+                    if Hades2Randomizer.Config.Debug then
+                        DebugPrint({Text = "Elemental Trait: " .. key .. " -> No Elemental Traits"})
+                    end
+
                     data.OffersElementalTrait = nil
                 end
             end
