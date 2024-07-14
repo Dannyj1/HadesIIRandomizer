@@ -39,8 +39,7 @@ function Hades2Randomizer.randomizeBoonOfferings()
             randomIndex = RandomInt(1, #availableWeaponUpgrades, rng)
         end
 
-        --mapping[data] = availableWeaponUpgrades[randomIndex]
-        mapping[data] = "StaffSecondStageTrait"
+        mapping[data] = availableWeaponUpgrades[randomIndex]
         table.remove(availableWeaponUpgrades, randomIndex)
     end
 
@@ -53,8 +52,7 @@ function Hades2Randomizer.randomizeBoonOfferings()
             randomIndex = RandomInt(1, #availableTraits, rng)
         end
 
-        --mapping[data] = availableTraits[randomIndex]
-        mapping[data] = "StaffSecondStageTrait"
+        mapping[data] = availableTraits[randomIndex]
         table.remove(availableTraits, randomIndex)
     end
 
@@ -67,8 +65,7 @@ function Hades2Randomizer.randomizeBoonOfferings()
             randomIndex = RandomInt(1, #availableConsumables, rng)
         end
 
-        --mapping[data] = availableConsumables[randomIndex]
-        mapping[data] = "StaffSecondStageTrait"
+        mapping[data] = availableConsumables[randomIndex]
         table.remove(availableConsumables, randomIndex)
     end
 

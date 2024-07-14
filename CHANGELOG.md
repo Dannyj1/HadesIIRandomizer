@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- Minions spawned by bosses, minibosses and certain enemies are now randomized. This mainly affects the Scylla fight. As a result of this, a few more enemies are added to the enemy randomization pool.
 
 ### Fixed
 - Fixed a crash when you had a rarify keepsake equipped and then hovered over a randomized hammer upgrade.

@@ -18,7 +18,7 @@ if not Hades2Randomizer.Config.Enabled then
     return
 end
 
--- TODO: Randomize Chronos spawns and maybe Scylla spawns if that doesn't become too difficult
+-- TODO: This function needs some cleanup...
 function Hades2Randomizer.randomizeEnemies()
     local rng = Hades2Randomizer.Data.Rng
     local availableEnemies = DeepCopyTable(Hades2Randomizer.Data.Enemies)
@@ -53,6 +53,10 @@ function Hades2Randomizer.randomizeEnemies()
 
         enemiesMapping[enemy] = availableEnemies[randomIndex]
         table.remove(availableEnemies, randomIndex)
+
+        if #availableEnemies <= 0 then
+            availableEnemies = DeepCopyTable(Hades2Randomizer.Data.Enemies)
+        end
     end
 
     for _, eliteEnemy in ipairs(Hades2Randomizer.Data.EliteEnemies) do
@@ -66,6 +70,10 @@ function Hades2Randomizer.randomizeEnemies()
 
         enemiesMapping[eliteEnemy] = availableEliteEnemies[randomIndex]
         table.remove(availableEliteEnemies, randomIndex)
+
+        if #availableEliteEnemies <= 0 then
+            availableEnemies = DeepCopyTable(Hades2Randomizer.Data.EliteEnemies)
+        end
     end
 
     for _, miniBoss in ipairs(Hades2Randomizer.Data.MiniBosses) do
@@ -79,6 +87,104 @@ function Hades2Randomizer.randomizeEnemies()
 
         enemiesMapping[miniBoss] = availableMiniBosses[randomIndex]
         table.remove(availableMiniBosses, randomIndex)
+
+        if #availableMiniBosses <= 0 then
+            availableEnemies = DeepCopyTable(Hades2Randomizer.Data.MiniBosses)
+        end
+    end
+
+    -- re-fill availableEnemies, availableEliteEnemies and availableMiniBosses. Remove any weapon that has spawner options.
+    availableEnemies = DeepCopyTable(Hades2Randomizer.Data.Enemies)
+    availableEliteEnemies = DeepCopyTable(Hades2Randomizer.Data.EliteEnemies)
+    availableMiniBosses = DeepCopyTable(Hades2Randomizer.Data.MiniBosses)
+
+    for _, enemy in ipairs(Hades2Randomizer.Data.Enemies) do
+        local enemyWeaponOptions = EnemyData[enemy].WeaponOptions
+
+        if enemyWeaponOptions ~= nil then
+            for _, weaponOption in ipairs(enemyWeaponOptions) do
+                local weaponData = WeaponData[weaponOption]
+
+                if weaponData ~= nil and weaponData.AIData ~= nil and weaponData.AIData.SpawnerOptions ~= nil then
+                    table.remove(availableEnemies, Hades2Randomizer.indexOf(availableEnemies, enemy))
+                end
+            end
+        end
+    end
+
+    for _, eliteEnemy in ipairs(Hades2Randomizer.Data.EliteEnemies) do
+        local eliteEnemyWeaponOptions = EnemyData[eliteEnemy].WeaponOptions
+
+        if eliteEnemyWeaponOptions ~= nil then
+            for _, weaponOption in ipairs(eliteEnemyWeaponOptions) do
+                local weaponData = WeaponData[weaponOption]
+
+                if weaponData ~= nil and weaponData.AIData ~= nil and weaponData.AIData.SpawnerOptions ~= nil then
+                    table.remove(availableEliteEnemies, Hades2Randomizer.indexOf(availableEliteEnemies, eliteEnemy))
+                end
+            end
+        end
+    end
+
+    for _, miniBoss in ipairs(Hades2Randomizer.Data.MiniBosses) do
+        local miniBossWeaponOptions = EnemyData[miniBoss].WeaponOptions
+
+        if miniBossWeaponOptions ~= nil then
+            for _, weaponOption in ipairs(miniBossWeaponOptions) do
+                local weaponData = WeaponData[weaponOption]
+
+                if weaponData ~= nil and weaponData.AIData ~= nil and weaponData.AIData.SpawnerOptions ~= nil then
+                    table.remove(availableMiniBosses, Hades2Randomizer.indexOf(availableMiniBosses, miniBoss))
+                end
+            end
+        end
+    end
+
+    -- An enemy that is spawned by a WeaponOption with SpawnerOptions can never map to another enemy that has a WeaponOption with SpawnerOptions (can be any, does not have to be the same), as this will cause unlimited spawns that increase exponentially. These need to be remapped to another random enemy/elite/miniBoss
+    for enemyFrom, _ in pairs(enemiesMapping) do
+        local enemyFromWeaponOptions = EnemyData[enemyFrom].WeaponOptions
+
+        if enemyFromWeaponOptions ~= nil then
+            for _, weaponOption in ipairs(enemyFromWeaponOptions) do
+                local enemyFromWeaponData = WeaponData[weaponOption]
+                
+                if enemyFromWeaponData ~= nil and enemyFromWeaponData.AIData ~= nil and enemyFromWeaponData.AIData.SpawnerOptions ~= nil then
+                    -- Enemies from enemyFromWeaponData.AIData.SpawnerOptions can not map to another enemy that has a WeaponOption with SpawnerOptions ~= nil
+                    for _, spawnedEnemyName in ipairs(enemyFromWeaponData.AIData.SpawnerOptions) do
+                        local mapping = enemiesMapping[spawnedEnemyName]
+
+                        if mapping ~= nil then
+                            local mappingWeaponOptions = EnemyData[mapping].WeaponOptions
+
+                            if mappingWeaponOptions ~= nil then
+                                for _, mappingWeaponOption in ipairs(mappingWeaponOptions) do
+                                    local mappingWeaponData = WeaponData[mappingWeaponOption]
+
+                                    if mappingWeaponData ~= nil and mappingWeaponData.AIData ~= nil and mappingWeaponData.AIData.SpawnerOptions ~= nil then
+                                        DebugPrint({ Text = "Mapping " .. spawnedEnemyName .. " to " .. mapping .. " is not allowed, remapping..." })
+                                        local randomIndex
+
+                                        if Hades2Randomizer.isEnemy(mapping) then
+                                            randomIndex = RandomInt(1, #availableEnemies, rng)
+                                            enemiesMapping[spawnedEnemyName] = availableEnemies[randomIndex]
+                                            table.remove(availableEnemies, randomIndex)
+                                        elseif Hades2Randomizer.isElite(mapping) then
+                                            randomIndex = RandomInt(1, #availableEliteEnemies, rng)
+                                            enemiesMapping[spawnedEnemyName] = availableEliteEnemies[randomIndex]
+                                            table.remove(availableEliteEnemies, randomIndex)
+                                        elseif Hades2Randomizer.isMiniBoss(mapping) then
+                                            randomIndex = RandomInt(1, #availableMiniBosses, rng)
+                                            enemiesMapping[spawnedEnemyName] = availableMiniBosses[randomIndex]
+                                            table.remove(availableMiniBosses, randomIndex)
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
     end
 
     DebugPrint({ Text = "Enemies Mapping:" })
@@ -158,5 +264,16 @@ function Hades2Randomizer.randomizeEnemies()
         end
 
         ::continue::
+    end
+
+    -- Apply randomized enemies to Enemy Weapon Data
+    for _, weaponData in pairs(WeaponData) do
+        if weaponData.AIData ~= nil and weaponData.AIData.SpawnerOptions ~= nil then
+            for i, enemyName in ipairs(weaponData.AIData.SpawnerOptions) do
+                if enemiesMapping[enemyName] ~= nil then
+                    weaponData.AIData.SpawnerOptions[i] = enemiesMapping[enemyName]
+                end
+            end
+        end
     end
 end

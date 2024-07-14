@@ -36,7 +36,7 @@ Hades2Randomizer.Data = {
     Weapons = {},
     Aspects = {},
 
-    Enemies = {"LightRanged", "SatyrCultist"},
+    Enemies = {"LightRanged"},
     EliteEnemies = {},
     -- Most of the minibosses will be filled dynamically, but they don't all have the word "miniboss" in their name or are defined in EnemySets
     MiniBosses = {"Treant", "FogEmitter_Elite", "Vampire", "WaterUnitMiniboss",
@@ -44,9 +44,43 @@ Hades2Randomizer.Data = {
 
     IgnoredSets = {"TestEnemies", "AllEliteAttributes", "RangedOnlyEliteAttributes", "ShadeOnlyEliteAttributes",
                    "EliteAttributesRunBanOptions", "BiomeP", "ManaUpgrade"},
-    IgnoredEnemies = {"CrawlerMiniboss"},
+    IgnoredEnemies = {"CrawlerMiniboss", "BattleStandardChronos"},
     UpgradePackages = {}
 }
+
+local function addEnemyToData(enemy)
+    if EnemyData[enemy] == nil then
+        return
+    end
+
+    if EnemyData[enemy].IsBoss ~= nil and EnemyData[enemy].IsBoss == false then
+        return
+    end
+
+    if Hades2Randomizer.tableContains(Hades2Randomizer.Data.IgnoredEnemies, enemy) then
+        return
+    end
+
+    if string.find(string.lower(enemy), "sheep") then
+        return
+    end
+
+    if string.find(string.lower(enemy), "miniboss") or Hades2Randomizer.tableContains(Hades2Randomizer.Data.MiniBosses, enemy) then
+        if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.MiniBosses, enemy) then
+            table.insert(Hades2Randomizer.Data.MiniBosses, enemy)
+        end
+    elseif string.find(string.lower(enemy), "elite") or (EnemyData[enemy].InheritFrom ~= nil
+            and Hades2Randomizer.tableContains(EnemyData[enemy].InheritFrom, "Elite")) or EnemyData[enemy].HealthBuffer ~= nil then
+        -- Elite enemies generally have armor, hence the HealthBuffer check
+        if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.EliteEnemies, enemy) then
+            table.insert(Hades2Randomizer.Data.EliteEnemies, enemy)
+        end
+    else
+        if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.Enemies, enemy) then
+            table.insert(Hades2Randomizer.Data.Enemies, enemy)
+        end
+    end
+end
 
 ModUtil.LoadOnce(function()
     Hades2Randomizer.Data.EncounterData = DeepCopyTable(EncounterData)
@@ -61,36 +95,19 @@ ModUtil.LoadOnce(function()
         end
 
         for _, enemy in ipairs(enemies) do
-            if EnemyData[enemy] ~= nil then
-                if EnemyData[enemy].IsBoss ~= nil and EnemyData[enemy].IsBoss == false then
-                    goto continue2
-                end
-
-                if Hades2Randomizer.tableContains(Hades2Randomizer.Data.IgnoredEnemies, enemy) then
-                    goto continue2
-                end
-
-                if string.find(string.lower(enemy), "miniboss") or Hades2Randomizer.tableContains(Hades2Randomizer.Data.MiniBosses, enemy) then
-                    if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.MiniBosses, enemy) then
-                        table.insert(Hades2Randomizer.Data.MiniBosses, enemy)
-                    end
-                elseif string.find(string.lower(enemy), "elite") or (EnemyData[enemy].InheritFrom ~= nil
-                        and Hades2Randomizer.tableContains(EnemyData[enemy].InheritFrom, "Elite")) or EnemyData[enemy].HealthBuffer ~= nil then
-                    -- Elite enemies generally have armor
-                    if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.EliteEnemies, enemy) then
-                        table.insert(Hades2Randomizer.Data.EliteEnemies, enemy)
-                    end
-                else
-                    if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.Enemies, enemy) then
-                        table.insert(Hades2Randomizer.Data.Enemies, enemy)
-                    end
-                end
-            end
-
-            ::continue2::
+            addEnemyToData(enemy)
         end
 
         ::continue::
+    end
+
+    -- Load enemies/minions from WeaponData
+    for _, data in pairs(WeaponData) do
+        if data.AIData ~= nil and data.AIData.SpawnerOptions ~= nil then
+            for _, enemy in ipairs(data.AIData.SpawnerOptions) do
+                addEnemyToData(enemy)
+            end
+        end
     end
 
     -- Load LootTable/Boon data
