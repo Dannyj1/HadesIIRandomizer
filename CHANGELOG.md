@@ -6,15 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.3.0] - 2024-07-14
+
 ### Changed
+
 - Minions spawned by bosses, minibosses and certain enemies are now randomized. This mainly affects the Scylla fight. As a result of this, a few more enemies are added to the enemy randomization pool.
 
 ### Fixed
+
 - Fixed a crash when you had a rarify keepsake equipped and then hovered over a randomized hammer upgrade.
 
 ## [1.2.0] - 2024-07-09
 
 ### Added
+
 - Added randomization of equipped Arcana Cards. Disabled by default, so this must be enabled in the config.
 
 ## [1.1.1] - 2024-06-03
@@ -47,7 +53,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed an issue where some ability graphics were glitched after being randomized.
 - No longer randomize the CrawlerMiniboss (uh-oh) as it does not work outside of it's normal room.
 
-[unreleased]: https://github.com/Dannyj1/HadesIIRandomizer/compare/1.2.0...HEAD
+[unreleased]: https://github.com/Dannyj1/HadesIIRandomizer/compare/1.3.0...HEAD
+[1.3.0]: https://github.com/Dannyj1/HadesIIRandomizer/compare/1.2.0...1.3.0
 [1.2.0]: https://github.com/Dannyj1/HadesIIRandomizer/compare/1.1.1...1.2.0
 [1.1.1]: https://github.com/Dannyj1/HadesIIRandomizer/compare/1.1.0...1.1.1
 [1.1.0]: https://github.com/Dannyj1/HadesIIRandomizer/compare/1.0.2...1.1.0
