@@ -7,8 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Fixed a crash when you had a rarify keepsake equipped and then hovered over a randomized hammer upgrade.
+
 ## [1.2.0] - 2024-07-09
 
+### Added
 - Added randomization of equipped Arcana Cards. Disabled by default, so this must be enabled in the config.
 
 ## [1.1.1] - 2024-06-03

@@ -39,7 +39,8 @@ function Hades2Randomizer.randomizeBoonOfferings()
             randomIndex = RandomInt(1, #availableWeaponUpgrades, rng)
         end
 
-        mapping[data] = availableWeaponUpgrades[randomIndex]
+        --mapping[data] = availableWeaponUpgrades[randomIndex]
+        mapping[data] = "StaffSecondStageTrait"
         table.remove(availableWeaponUpgrades, randomIndex)
     end
 
@@ -52,7 +53,8 @@ function Hades2Randomizer.randomizeBoonOfferings()
             randomIndex = RandomInt(1, #availableTraits, rng)
         end
 
-        mapping[data] = availableTraits[randomIndex]
+        --mapping[data] = availableTraits[randomIndex]
+        mapping[data] = "StaffSecondStageTrait"
         table.remove(availableTraits, randomIndex)
     end
 
@@ -65,7 +67,8 @@ function Hades2Randomizer.randomizeBoonOfferings()
             randomIndex = RandomInt(1, #availableConsumables, rng)
         end
 
-        mapping[data] = availableConsumables[randomIndex]
+        --mapping[data] = availableConsumables[randomIndex]
+        mapping[data] = "StaffSecondStageTrait"
         table.remove(availableConsumables, randomIndex)
     end
 
@@ -132,4 +135,16 @@ function Hades2Randomizer.randomizeBoonOfferings()
             end
         end
     end
+end
+
+local oUpgradeChoiceScreenCheckRarifyButton = UpgradeChoiceScreenCheckRarifyButton
+function UpgradeChoiceScreenCheckRarifyButton(screen, button)
+    local traitData = button.Data
+
+    -- Fixes crashes when hovering over a hammer upgrade while having a rarify keepsake
+    if traitData.RarityLevels == nil then
+        return
+    end
+
+    oUpgradeChoiceScreenCheckRarifyButton(screen, button)
 end
