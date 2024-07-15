@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Enemies spawned by Vow of Wandering are now properly randomized, instead of using the vanilla mapping they use the randomized mapping.
-- When RandomizeKeepsakes is enabled, your equipped keepsake will now be randomized after every boss fight. The keepsake display case will in biome transition rooms will be locked.
+- When RandomizeKeepsakes is enabled, your equipped keepsake will now be randomized after every boss fight. The keepsake display case in biome transition rooms will be locked.
 
 ### Fixed
 - Killing a MiniBoss should now kill all summons/minions like it does in unmodded Hades 2. 
