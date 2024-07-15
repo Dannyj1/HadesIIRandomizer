@@ -6,15 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.4.0] - 2024-07-15
+
 ### Added
+
 - Added late game health scaling. Enemies from earlier biomes in the later biomes will now have more health and armor.
 - Added late game difficulty scaling. There will now be less enemies in the later biomes if they are from earlier biomes. This should fix the very long rooms with many spawns, especially in Tartarus.
 
 ### Changed
+
 - Enemies spawned by Vow of Wandering are now properly randomized, instead of using the vanilla mapping they use the randomized mapping.
-- When RandomizeKeepsakes is enabled, your equipped keepsake will now be randomized after every boss fight. The keepsake display case will in biome transition rooms will be locked.
+- When RandomizeKeepsakes is enabled, your equipped keepsake will now be randomized after every boss fight. The keepsake display case in biome transition rooms will be locked.
 
 ### Fixed
+
 - Killing a MiniBoss should now kill all summons/minions like it does in unmodded Hades 2. 
 - Fixed some elite enemies potentially being classified as a non-elite enemy, causing normal enemies to sometimes be replaced by elites.
 
@@ -64,7 +70,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed an issue where some ability graphics were glitched after being randomized.
 - No longer randomize the CrawlerMiniboss (uh-oh) as it does not work outside of it's normal room.
 
-[unreleased]: https://github.com/Dannyj1/HadesIIRandomizer/compare/1.3.0...HEAD
+[unreleased]: https://github.com/Dannyj1/HadesIIRandomizer/compare/1.4.0...HEAD
+[1.4.0]: https://github.com/Dannyj1/HadesIIRandomizer/compare/1.3.0...1.4.0
 [1.3.0]: https://github.com/Dannyj1/HadesIIRandomizer/compare/1.2.0...1.3.0
 [1.2.0]: https://github.com/Dannyj1/HadesIIRandomizer/compare/1.1.1...1.2.0
 [1.1.1]: https://github.com/Dannyj1/HadesIIRandomizer/compare/1.1.0...1.1.1
