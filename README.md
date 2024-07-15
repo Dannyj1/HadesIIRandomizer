@@ -52,8 +52,14 @@ The mod comes with a `config.lua` file that allows you to change certain setting
 - `RandomizeArcanaCards`: Randomly equips or unequips arcana cards at the start of the run according to the chance set in the config. Default: `false`.
 - `ArcanaCardEquipChance`: The chance that an arcana card is equipped at the start of the run. Should be between 1 and 100. Default: `50`.
 
+## Limitations
+Some of these limitations may be solved in the future, but I am currently unable to do so.
+- The pre-placed satyrs in Chronos' room can not be randomized. I am unable to find a way to do so. Unless someone else knows how to do this, this won't be randomizable.
+- The first run in a fresh file is not randomized. I could not get this working without causing crashes.
+- Loading a run from a save file (so not starting a new run from the hub) after restarting the game is not randomized. You will have to give up and restart your run.
+
 ## Known Issues
-- Some encounters in later areas might be a bit too long and have a lot of enemies.
+None at the moment.
 
 ## Roadmap
 - See if randomizing enemies spawned by Chronos and Scylla is fun or not.

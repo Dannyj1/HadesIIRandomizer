@@ -70,16 +70,15 @@ function LoadMap(argTable)
             LoadPackages({ Name = Hades2Randomizer.Data.UpgradePackages[trait.Name] })
         end
     end
+
+    if Hades2Randomizer.Config.ScaleStats then
+        Hades2Randomizer.scaleStats()
+    end
 end
 
 local oDoUnlockRoomExits = DoUnlockRoomExits
 function DoUnlockRoomExits(run, room)
     Hades2Randomizer.Data.RoomCounter = Hades2Randomizer.Data.RoomCounter + 1
-
-    if Hades2Randomizer.Config.ScaleStats then
-        Hades2Randomizer.scaleStats()
-    end
-
     oDoUnlockRoomExits(run, room)
 end
 

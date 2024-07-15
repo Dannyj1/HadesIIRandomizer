@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Added late game health scaling. Enemies from earlier biomes in the later biomes will now have more health and armor.
+- Added late game difficulty scaling. There will now be less enemies in the later biomes if they are from earlier biomes. This should fix the very long rooms with many spawns, especially in Tartarus.
+
+### Fixed
+- Fixed some elite enemies potentially being classified as a non-elite enemy, causing normal enemies to sometimes be replaced by elites.
 
 ## [1.3.0] - 2024-07-14
 

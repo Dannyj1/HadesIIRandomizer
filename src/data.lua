@@ -65,20 +65,21 @@ local function addEnemyToData(enemy)
         return
     end
 
-    if string.find(string.lower(enemy), "miniboss") or Hades2Randomizer.tableContains(Hades2Randomizer.Data.MiniBosses, enemy) then
-        if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.MiniBosses, enemy) then
-            table.insert(Hades2Randomizer.Data.MiniBosses, enemy)
-        end
+    if Hades2Randomizer.tableContains(Hades2Randomizer.Data.MiniBosses, enemy)
+            or Hades2Randomizer.tableContains(Hades2Randomizer.Data.EliteEnemies, enemy)
+            or Hades2Randomizer.tableContains(Hades2Randomizer.Data.Enemies, enemy) then
+        return
+    end
+
+    if string.find(string.lower(enemy), "miniboss") then
+        table.insert(Hades2Randomizer.Data.MiniBosses, enemy)
     elseif string.find(string.lower(enemy), "elite") or (EnemyData[enemy].InheritFrom ~= nil
-            and Hades2Randomizer.tableContains(EnemyData[enemy].InheritFrom, "Elite")) or EnemyData[enemy].HealthBuffer ~= nil then
+            and Hades2Randomizer.tableContains(EnemyData[enemy].InheritFrom, "Elite"))
+            or EnemyData[enemy].HealthBuffer ~= nil then
         -- Elite enemies generally have armor, hence the HealthBuffer check
-        if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.EliteEnemies, enemy) then
-            table.insert(Hades2Randomizer.Data.EliteEnemies, enemy)
-        end
+        table.insert(Hades2Randomizer.Data.EliteEnemies, enemy)
     else
-        if not Hades2Randomizer.tableContains(Hades2Randomizer.Data.Enemies, enemy) then
-            table.insert(Hades2Randomizer.Data.Enemies, enemy)
-        end
+        table.insert(Hades2Randomizer.Data.Enemies, enemy)
     end
 end
 
