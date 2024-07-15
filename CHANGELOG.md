@@ -22,7 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Minions spawned by bosses, minibosses and certain enemies are now randomized. This mainly affects the Scylla fight. As a result of this, a few more enemies are added to the enemy randomization pool.
+- Minions spawned by bosses, minibosses and certain enemies are now randomized. This mainly affects the Scylla, Cerberus and Chronos fights. As a result of this, a few more enemies are added to the enemy randomization pool.
 
 ### Fixed
 
