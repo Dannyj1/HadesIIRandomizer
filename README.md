@@ -62,8 +62,6 @@ Some of these limitations may be solved in the future, but I am currently unable
 None at the moment.
 
 ## Roadmap
-- See if randomizing enemies spawned by Chronos and Scylla is fun or not.
-- Add a "minimum health" scaling for enemies in later areas to up the difficulty.
 - Randomize rooms
 - Randomize enabled testaments/nightmare level
 - Randomize music
