@@ -10,7 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added late game health scaling. Enemies from earlier biomes in the later biomes will now have more health and armor.
 - Added late game difficulty scaling. There will now be less enemies in the later biomes if they are from earlier biomes. This should fix the very long rooms with many spawns, especially in Tartarus.
 
+### Changed
+- Enemies spawned by Vow of Wandering are now properly randomized, instead of using the vanilla mapping they use the randomized mapping.
+- When RandomizeKeepsakes is enabled, your equipped keepsake will now be randomized after every boss fight. The keepsake display case will in biome transition rooms will be locked.
+
 ### Fixed
+- Killing a MiniBoss should now kill all summons/minions like it does in unmodded Hades 2. 
 - Fixed some elite enemies potentially being classified as a non-elite enemy, causing normal enemies to sometimes be replaced by elites.
 
 ## [1.3.0] - 2024-07-14

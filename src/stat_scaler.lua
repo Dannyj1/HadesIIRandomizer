@@ -52,7 +52,6 @@ local function restoreOriginalStats()
     originalDifficulty = {}
 end
 
--- TODO: Add min health and min difficulty (to fix very long encounters)
 function Hades2Randomizer.scaleStats()
     restoreOriginalStats()
     Hades2Randomizer.scaleEarlyGameStats()

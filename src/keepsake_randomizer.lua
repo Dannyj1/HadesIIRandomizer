@@ -32,3 +32,15 @@ function Hades2Randomizer.randomizeKeepsakes()
     GameState.LastAwardTrait = randomKeepsake
     EquipKeepsake(CurrentRun.Hero, randomKeepsake)
 end
+
+local oLeaveRoom = LeaveRoom
+function LeaveRoom(currentRun, door)
+    oLeaveRoom(currentRun, door)
+
+    if Hades2Randomizer.Config.RandomizeKeepsake then
+        if string.match(string.lower(door.Room.Name), "postboss") then
+            Hades2Randomizer.randomizeKeepsakes()
+            door.Room.BlockKeepsakeMenu = true
+        end
+    end
+end

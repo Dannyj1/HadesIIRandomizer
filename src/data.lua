@@ -26,6 +26,7 @@ Hades2Randomizer.Data = {
     EnemySets = nil,
     EnemyData = nil,
     LootData = nil,
+    SwapMap = nil,
 
     PriorityUpgrades = {},
     WeaponUpgrades = {},
@@ -88,6 +89,7 @@ ModUtil.LoadOnce(function()
     Hades2Randomizer.Data.EnemySets = DeepCopyTable(EnemySets)
     Hades2Randomizer.Data.EnemyData = DeepCopyTable(EnemyData)
     Hades2Randomizer.Data.LootData = DeepCopyTable(LootData)
+    Hades2Randomizer.Data.SwapMap = DeepCopyTable(MetaUpgradeData.NextBiomeEnemyShrineUpgrade.SwapMap)
 
     -- Load enemy data
     for biome, enemies in pairs(EnemySets) do

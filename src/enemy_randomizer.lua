@@ -249,6 +249,21 @@ function Hades2Randomizer.randomizeEnemies()
             end
         end
 
+        -- Update WipeEnemiesOnKill so miniboss summons are wiped on kill
+        if data.WipeEnemiesOnKill ~= nil then
+            if enemiesMapping[data.WipeEnemiesOnKill] ~= nil then
+                data.WipeEnemiesOnKill = enemiesMapping[data.WipeEnemiesOnKill]
+            end
+        end
+
+        if data.WipeEnemiesOnKillAllTypes ~= nil then
+            for i, enemy in ipairs(data.WipeEnemiesOnKillAllTypes) do
+                if enemiesMapping[enemy] ~= nil then
+                    data.WipeEnemiesOnKillAllTypes[i] = enemiesMapping[enemy]
+                end
+            end
+        end
+
         ::continue::
     end
 
@@ -276,4 +291,25 @@ function Hades2Randomizer.randomizeEnemies()
             end
         end
     end
+
+    -- Apply to Vow of Wandering SwapMap
+    local originalSwapMap = DeepCopyTable(MetaUpgradeData.NextBiomeEnemyShrineUpgrade.SwapMap)
+    MetaUpgradeData.NextBiomeEnemyShrineUpgrade.SwapMap = {}
+
+    for key, value in pairs(originalSwapMap) do
+        local newKey = key
+        local newValue = value.Name
+
+        if enemiesMapping[key] ~= nil then
+            newKey = enemiesMapping[key]
+        end
+
+        if enemiesMapping[value.Name] ~= nil then
+            newValue = enemiesMapping[value.Name]
+        end
+
+        MetaUpgradeData.NextBiomeEnemyShrineUpgrade.SwapMap[newKey] = { Name = newValue }
+    end
+
+    DebugPrintTable(MetaUpgradeData.NextBiomeEnemyShrineUpgrade.SwapMap, true, 0)
 end
