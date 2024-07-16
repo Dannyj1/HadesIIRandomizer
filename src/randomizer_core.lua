@@ -25,6 +25,7 @@ function StartOver(args)
     EnemySets = DeepCopyTable(Hades2Randomizer.Data.EnemySets)
     EnemyData = DeepCopyTable(Hades2Randomizer.Data.EnemyData)
     WeaponOptions = DeepCopyTable(Hades2Randomizer.Data.WeaponOptions)
+    WeaponData = DeepCopyTable(Hades2Randomizer.Data.WeaponData)
     MetaUpgradeData.NextBiomeEnemyShrineUpgrade.SwapMap = DeepCopyTable(Hades2Randomizer.Data.SwapMap)
 
     if Hades2Randomizer.Config.RandomizeEnemies then

@@ -37,6 +37,7 @@ Hades2Randomizer.Data = {
     Weapons = {},
     Aspects = {},
     WeaponOptions = {},
+    WeaponData = {},
 
     Enemies = {"LightRanged"},
     EliteEnemies = {},
@@ -47,7 +48,8 @@ Hades2Randomizer.Data = {
     IgnoredSets = {"TestEnemies", "AllEliteAttributes", "RangedOnlyEliteAttributes", "ShadeOnlyEliteAttributes",
                    "EliteAttributesRunBanOptions", "BiomeP", "ManaUpgrade", "NPC_Artemis_Field_01"},
     IgnoredEnemies = {"CrawlerMiniboss", "BattleStandardChronos"},
-    IgnoredWeaponOptions = {"HecateSplit1", "HecateSplit2", "HecateSplit3", "WaterUnitDive", "SirenDrummerBeatCoralFar"},
+    --IgnoredWeaponOptions = {"HecateSplit1", "HecateSplit2", "HecateSplit3", "WaterUnitDive", "SirenDrummerBeatCoralFar", "ScyllaNotes", "Treant2RangedSpray"},
+    IgnoredWeaponOptions = {"HecateRangedTorchesSpirals", "HecateLaser", "HecateSplit1", "HecateSplit2", "HecateSplit3"},
     UpgradePackages = {},
 }
 
@@ -57,6 +59,7 @@ local function isWeaponOptionBlacklisted(weaponName)
             or string.match(weaponName, "Sheep") or string.match(weaponName, "Passive")
             or string.match(weaponName, "Base") or string.match(weaponName, "Trap")
             or string.match(weaponName, "Test") or string.match(weaponName, "OilPuddle")
+            or Hades2Randomizer.tableContains(WeaponSets.LavaWeaponNames, weaponName)
 end
 
 local function addEnemyToData(enemy)
@@ -100,6 +103,7 @@ ModUtil.LoadOnce(function()
     Hades2Randomizer.Data.EnemyData = DeepCopyTable(EnemyData)
     Hades2Randomizer.Data.LootData = DeepCopyTable(LootData)
     Hades2Randomizer.Data.SwapMap = DeepCopyTable(MetaUpgradeData.NextBiomeEnemyShrineUpgrade.SwapMap)
+    Hades2Randomizer.Data.WeaponData = DeepCopyTable(WeaponData)
 
     -- Load enemy data
     for biome, enemies in pairs(EnemySets) do
@@ -133,7 +137,7 @@ ModUtil.LoadOnce(function()
 
         if data.WeaponOptions ~= nil then
             for _, weaponName in ipairs(data.WeaponOptions) do
-                if not isWeaponOptionBlacklisted(weaponName) then
+                if not isWeaponOptionBlacklisted(weaponName) and WeaponDataEnemies[weaponName] ~= nil then
                     table.insert(Hades2Randomizer.Data.WeaponOptions, weaponName)
                 end
             end

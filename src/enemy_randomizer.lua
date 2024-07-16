@@ -208,6 +208,10 @@ function Hades2Randomizer.randomizeEnemies()
 
             weaponOptionsMapping[weaponOption] = availableWeaponOptions[randomIndex]
             table.remove(availableWeaponOptions, randomIndex)
+
+            if #availableWeaponOptions <= 0 then
+                availableWeaponOptions = DeepCopyTable(Hades2Randomizer.Data.WeaponOptions)
+            end
         end
 
         if Hades2Randomizer.Config.Debug then
@@ -313,6 +317,8 @@ function Hades2Randomizer.randomizeEnemies()
     end
 
     if Hades2Randomizer.Config.RandomizeEnemyWeapons then
+        local originalWeaponData = DeepCopyTable(Hades2Randomizer.Data.WeaponData)
+
         -- Apply randomized enemy weapons
         for enemyName, data in pairs(EnemyData) do
             if string.match(enemyName, "Base") then
@@ -329,21 +335,74 @@ function Hades2Randomizer.randomizeEnemies()
 
             if data.WeaponOptions ~= nil then
                 for i, weaponName in ipairs(data.WeaponOptions) do
-                    if weaponOptionsMapping[weaponName] ~= nil then
-                        data.WeaponOptions[i] = weaponOptionsMapping[weaponName]
+                    local mapping = weaponOptionsMapping[weaponName]
+
+                    if mapping ~= nil then
+                        if WeaponData[mapping].AIData == nil then
+                            WeaponData[mapping].AIData = {}
+                        end
+
+                        if originalWeaponData[weaponName].AIData ~= nil then
+                            WeaponData[mapping].AIData.PreAttackAnimation = originalWeaponData[weaponName].AIData.PreAttackAnimation
+                            WeaponData[mapping].AIData.PostAttackAnimation = originalWeaponData[weaponName].AIData.PostAttackAnimation
+                        else
+                            WeaponData[mapping].AIData.PreAttackAnimation = nil
+                            WeaponData[mapping].AIData.PostAttackAnimation = nil
+                        end
+
+                        if data.WeaponOptions[i] ~= mapping then
+                            if WeaponData[mapping].Requirements ~= nil then
+                                WeaponData[mapping].Requirements = nil
+                            end
+
+                            if WeaponData[mapping].AIData.SpawnFromMarker ~= nil then
+                                WeaponData[mapping].AIData.SpawnFromMarker = nil
+                            end
+
+                            if WeaponData[mapping].AIData.RetreatBufferDistance ~= nil then
+                                WeaponData[mapping].AIData.RetreatBufferDistance = nil
+                            end
+
+                            if WeaponData[mapping].AIData.RetreatAfterAttack ~= nil then
+                                WeaponData[mapping].AIData.RetreatAfterAttack = nil
+                            end
+
+                            if WeaponData[mapping].GameStateRequirements ~= nil then
+                                WeaponData[mapping].GameStateRequirements = nil
+                            end
+                        end
+
+                        --WeaponData[mapping].AIData.FireAnimation = originalWeaponData[weaponName].AIData.FireAnimation
+                        data.WeaponOptions[i] = mapping
 
                         -- Set DisableOrbitAI to false if OrbitTickDegrees == nil, fixes crashed
                         if data.OrbitTickDegrees == nil then
                             data.DisableOrbitAI = false
                         end
                     end
-
-                    ::continue2::
                 end
             end
 
             ::continue::
         end
+
+        -- Print new weapon options like this:
+        -- EnemyName = { "weapon1", "weapon2" }
+        local printData = {}
+
+        for enemyName, data in pairs(EnemyData) do
+            if Hades2Randomizer.tableContains(Hades2Randomizer.Data.IgnoredEnemies, enemyName) or Hades2Randomizer.tableContains(Hades2Randomizer.Data.IgnoredSets, enemyName) then
+                goto continue
+            end
+
+            if data.WeaponOptions ~= nil then
+                printData[enemyName] = data.WeaponOptions
+            end
+
+            ::continue::
+        end
+
+        DebugPrintTable(printData, true, 0)
     end
 
     -- Apply randomized enemies to Enemy Weapon Data
@@ -375,6 +434,22 @@ function Hades2Randomizer.randomizeEnemies()
 
         MetaUpgradeData.NextBiomeEnemyShrineUpgrade.SwapMap[newKey] = { Name = newValue }
     end
+end
 
-    DebugPrintTable(MetaUpgradeData.NextBiomeEnemyShrineUpgrade.SwapMap, true, 0)
+local oLeap = Leap
+function Leap(enemy, aiData, leapType)
+    if aiData.LeapSpeed == nil then
+        return
+    end
+
+    oLeap(enemy, aiData, leapType)
+end
+
+local oRetreat = Retreat
+function Retreat(enemy, aiData, retreatFromId)
+    if aiData.RetreatBufferDistance == nil then
+        return
+    end
+
+    oRetreat(enemy, aiData, retreatFromId)
 end

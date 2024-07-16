@@ -63,11 +63,11 @@ function Hades2Randomizer.scaleEarlyGameStats()
         return
     end
 
-    local maxHealth = 999999999
-    local maxArmor = 999999999
-    local maxMinibossHealth = 999999999
-    local maxMinibossArmor = 999999999
-    local maxDifficulty = 999999999
+    local maxHealth = 99999999
+    local maxArmor = 99999999
+    local maxMinibossHealth = 99999999
+    local maxMinibossArmor = 99999999
+    local maxDifficulty = 99999999
 
     if Hades2Randomizer.Data.RoomCounter <= 13 then
         -- Erebus
