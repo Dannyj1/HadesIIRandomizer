@@ -142,3 +142,15 @@ function Hades2Randomizer.randomizeBoonOfferings()
         end
     end
 end
+
+local oUpgradeChoiceScreenCheckRarifyButton = UpgradeChoiceScreenCheckRarifyButton
+function UpgradeChoiceScreenCheckRarifyButton(screen, button)
+    local traitData = button.Data
+
+    -- Fixes crashes when hovering over a hammer upgrade while having a rarify keepsake
+    if traitData.RarityLevels == nil then
+        return
+    end
+
+    oUpgradeChoiceScreenCheckRarifyButton(screen, button)
+end

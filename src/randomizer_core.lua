@@ -25,6 +25,7 @@ function StartOver(args)
     EnemySets = DeepCopyTable(Hades2Randomizer.Data.EnemySets)
     EnemyData = DeepCopyTable(Hades2Randomizer.Data.EnemyData)
     WeaponOptions = DeepCopyTable(Hades2Randomizer.Data.WeaponOptions)
+    MetaUpgradeData.NextBiomeEnemyShrineUpgrade.SwapMap = DeepCopyTable(Hades2Randomizer.Data.SwapMap)
 
     if Hades2Randomizer.Config.RandomizeEnemies then
         Hades2Randomizer.randomizeEnemies()
@@ -44,6 +45,10 @@ function StartOver(args)
 
     if Hades2Randomizer.Config.RandomizeWeapon then
         Hades2Randomizer.randomizeWeapon()
+    end
+
+    if Hades2Randomizer.Config.RandomizeArcanaCards then
+        Hades2Randomizer.randomizeEquippedCards()
     end
 
     oStartOver(args)
@@ -67,16 +72,15 @@ function LoadMap(argTable)
             LoadPackages({ Name = Hades2Randomizer.Data.UpgradePackages[trait.Name] })
         end
     end
+
+    if Hades2Randomizer.Config.ScaleStats then
+        Hades2Randomizer.scaleStats()
+    end
 end
 
 local oDoUnlockRoomExits = DoUnlockRoomExits
 function DoUnlockRoomExits(run, room)
     Hades2Randomizer.Data.RoomCounter = Hades2Randomizer.Data.RoomCounter + 1
-
-    if Hades2Randomizer.Config.ScaleStats then
-        Hades2Randomizer.scaleStats()
-    end
-
     oDoUnlockRoomExits(run, room)
 end
 

@@ -54,3 +54,13 @@ function Hades2Randomizer.splitOnCapitalLetters(str)
 
     return parts
 end
+
+function Hades2Randomizer.indexOf(table, value)
+    for i, v in ipairs(table) do
+        if v == value then
+            return i
+        end
+    end
+
+    return nil
+end

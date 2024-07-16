@@ -12,6 +12,7 @@ Please keep in mind that this mod is in it's early stages, so there might be iss
 - **Keepsake**: The keepsake you start with is randomized. This can be any keepsake in the game, including the ones you have not unlocked yet.
 - **Weapon**: The weapon you start with is randomized. This can be any weapon in the game, including the ones you have not unlocked yet.
 - **Weapon Aspect**: The aspect of the weapon you start with is randomized. This can be any aspect of the weapon you have chosen, including the ones you have not unlocked yet.
+- **Arcana Cards**: Randomly equips or unequips arcana cards at the start of the run according to the chance set in the config. Only changes the cards that you have already unlocked.
 
 Some of these features are disabled by default and can be enabled in the config. See [Configuration](#configuration) for more information.
 
@@ -48,15 +49,21 @@ The mod comes with a `config.lua` file that allows you to change certain setting
 - `ScaleStats`: Scales enemy and miniboss stats in the earlier areas, so you do not have to spent ages on a single enemy. Default: `true`.
 - `RandomizeKeepsake`: Randomizes the keepsake you start with. Default: `false`.
 - `RandomizeWeapon`: Randomizes the weapon and the weapon's aspect you start with. Default: `false`.
+- `RandomizeArcanaCards`: Randomly equips or unequips arcana cards at the start of the run according to the chance set in the config. Default: `false`.
+- `ArcanaCardEquipChance`: The chance that an arcana card is equipped at the start of the run. Should be between 1 and 100. Default: `50`.
+
+## Limitations
+Some of these limitations may be solved in the future, but I am currently unable to do so.
+- The pre-placed satyrs in Chronos' room can not be randomized. I am unable to find a way to do so. Unless someone else knows how to do this, this won't be randomizable.
+- The first run in a fresh file is not randomized. I could not get this working without causing crashes.
+- Loading a run from a save file (so not starting a new run from the hub) after restarting the game is not randomized. You will have to give up and restart your run.
 
 ## Known Issues
-- Some encounters in later areas might be a bit too long and have a lot of enemies.
+None at the moment.
 
 ## Roadmap
-- See if randomizing enemies spawned by Chronos and Scylla is fun or not.
-- Add a "minimum health" scaling for enemies in later areas to up the difficulty.
 - Randomize rooms
-- Randomize Arcana cards
+- Randomize enabled testaments/nightmare level
 - Randomize music
 - See what else can be randomized
 - Add a UI in which settings can be changed in-game, without restarts. This will probably only happen once a UI library gets released.

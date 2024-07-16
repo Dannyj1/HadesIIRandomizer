@@ -52,9 +52,16 @@ local function restoreOriginalStats()
     originalDifficulty = {}
 end
 
--- TODO: Add min health and min difficulty (to fix very long encounters)
 function Hades2Randomizer.scaleStats()
     restoreOriginalStats()
+    Hades2Randomizer.scaleEarlyGameStats()
+    Hades2Randomizer.scaleLateGameStats()
+end
+
+function Hades2Randomizer.scaleEarlyGameStats()
+    if Hades2Randomizer.Data.RoomCounter >= 24 then
+        return
+    end
 
     local maxHealth = 999999999
     local maxArmor = 999999999
@@ -62,13 +69,15 @@ function Hades2Randomizer.scaleStats()
     local maxMinibossArmor = 999999999
     local maxDifficulty = 999999999
 
-    if Hades2Randomizer.Data.RoomCounter < 14 then
+    if Hades2Randomizer.Data.RoomCounter <= 13 then
+        -- Erebus
         maxHealth = 400
         maxArmor = 350
         maxMinibossHealth = 750
         maxMinibossArmor = 1750
         maxDifficulty = 55
-    elseif Hades2Randomizer.Data.RoomCounter < 24 then
+    elseif Hades2Randomizer.Data.RoomCounter <= 23 then
+        -- Oceanus
         maxHealth = 750
         maxArmor = 550
         maxMinibossHealth = 1400
@@ -117,6 +126,52 @@ function Hades2Randomizer.scaleStats()
                 values.GeneratorData.DifficultyRating = math.min(values.GeneratorData.DifficultyRating, maxDifficulty)
                 originalDifficulty[enemyName] = values.GeneratorData.DifficultyRating
             end
+        end
+
+        ::continue::
+    end
+end
+
+function Hades2Randomizer.scaleLateGameStats()
+    if Hades2Randomizer.Data.RoomCounter <= 23 then
+        return
+    end
+
+    local minDifficulty = 0
+    local minHealth = 0
+    local minArmor = 0
+
+    if Hades2Randomizer.Data.RoomCounter <= 29 then
+        -- Mourning Fields
+        minDifficulty = 10
+        minHealth = 100
+        minArmor = 100
+    else
+        -- Tartarus/Chronos
+        minDifficulty = 25
+        minHealth = 200
+        minArmor = 200
+    end
+
+    -- Apply and store old values, minibosses should be treated the same as enemies in this case
+    for enemyName, values in pairs(EnemyData) do
+        if not Hades2Randomizer.isEnemy(enemyName) and not Hades2Randomizer.isElite(enemyName) and not Hades2Randomizer.isMiniBoss(enemyName) then
+            goto continue
+        end
+
+        if values.MaxHealth ~= nil and values.MaxHealth >= 10 then
+            values.MaxHealth = math.max(values.MaxHealth, minHealth)
+            originalMaxHealth[enemyName] = values.MaxHealth
+        end
+
+        if values.HealthBuffer ~= nil and values.MaxHealth >= 10 then
+            values.HealthBuffer = math.max(values.HealthBuffer, minArmor)
+            originalMaxArmor[enemyName] = values.HealthBuffer
+        end
+
+        if values.GeneratorData.DifficultyRating ~= nil then
+            values.GeneratorData.DifficultyRating = math.max(values.GeneratorData.DifficultyRating, minDifficulty)
+            originalDifficulty[enemyName] = values.GeneratorData.DifficultyRating
         end
 
         ::continue::
