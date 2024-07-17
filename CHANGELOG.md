@@ -6,11 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.5.0] - 2024-07-17
+
 ### Note:
+
 This release has been tested against the latest early access patch (patch 4) and everything seems to work fine. Older versions should also work without any updates.
 New/changed boons and any other changes should automatically be picked up by the randomizer, even in future patches.
 
 ### Changed
+
 - `RandomizeWeapons` now only picks a random weapon that you have unlocked instead of any weapon. It also only picks a random aspect that you have unlocked, instead of any aspect.
 - `RandomizeKeepsakes` now only picks unlocked keepsakes instead of any keepsake.
 
@@ -77,7 +82,8 @@ New/changed boons and any other changes should automatically be picked up by the
 - Fixed an issue where some ability graphics were glitched after being randomized.
 - No longer randomize the CrawlerMiniboss (uh-oh) as it does not work outside of it's normal room.
 
-[unreleased]: https://github.com/Dannyj1/HadesIIRandomizer/compare/1.4.0...HEAD
+[unreleased]: https://github.com/Dannyj1/HadesIIRandomizer/compare/1.5.0...HEAD
+[1.5.0]: https://github.com/Dannyj1/HadesIIRandomizer/compare/1.4.0...1.5.0
 [1.4.0]: https://github.com/Dannyj1/HadesIIRandomizer/compare/1.3.0...1.4.0
 [1.3.0]: https://github.com/Dannyj1/HadesIIRandomizer/compare/1.2.0...1.3.0
 [1.2.0]: https://github.com/Dannyj1/HadesIIRandomizer/compare/1.1.1...1.2.0
