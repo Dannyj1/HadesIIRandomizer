@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- `RandomizeWeapons` now only picks a random weapon that you have unlocked instead of any weapon. It also only picks a random aspect that you have unlocked, instead of any aspect.
+
 ## [1.4.0] - 2024-07-15
 
 ### Added

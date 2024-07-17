@@ -18,15 +18,28 @@ function Hades2Randomizer.randomizeWeapon()
     local rng = Hades2Randomizer.Data.Rng
     local randomWeaponIndex = RandomInt(1, #Hades2Randomizer.Data.Weapons, rng)
     local randomWeapon = Hades2Randomizer.Data.Weapons[randomWeaponIndex]
-    local aspects = Hades2Randomizer.Data.Aspects[randomWeapon]
-    local randomAspectIndex = RandomInt(1, #aspects, rng)
-    local randomAspect = aspects[randomAspectIndex]
+
+    while not IsWeaponUnlocked(randomWeapon) do
+        randomWeaponIndex = RandomInt(1, #Hades2Randomizer.Data.Weapons, rng)
+        randomWeapon = Hades2Randomizer.Data.Weapons[randomWeaponIndex]
+    end
 
     DebugPrint({ Text = "Randomizing weapon: " .. randomWeapon })
-    DebugPrint({ Text = "Randomizing aspect: " .. randomAspect })
-
-    GameState.LastWeaponUpgradeName[randomWeapon] = randomAspect
 
     EquipPlayerWeapon(WeaponData[randomWeapon])
     EquipWeaponUpgrade(CurrentRun.Hero)
+
+    if HasAnyAspectUnlocked(randomWeapon) then
+        local aspects = Hades2Randomizer.Data.Aspects[randomWeapon]
+        local randomAspectIndex = RandomInt(1, #aspects, rng)
+        local randomAspect = aspects[randomAspectIndex]
+
+        while not GameState.WorldUpgradesAdded[randomAspect] do
+            randomAspectIndex = RandomInt(1, #aspects, rng)
+            randomAspect = aspects[randomAspectIndex]
+        end
+
+        DebugPrint({ Text = "Randomizing aspect: " .. randomAspect })
+        GameState.LastWeaponUpgradeName[randomWeapon] = randomAspect
+    end
 end
