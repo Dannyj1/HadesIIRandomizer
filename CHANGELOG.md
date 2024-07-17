@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Note:
+This release has been tested against the latest early access patch (patch 4) and everything seems to work fine. Older versions should also work without any updates.
+New/changed boons and any other changes should automatically be picked up by the randomizer, even in future patches.
 
 ### Changed
 - `RandomizeWeapons` now only picks a random weapon that you have unlocked instead of any weapon. It also only picks a random aspect that you have unlocked, instead of any aspect.
