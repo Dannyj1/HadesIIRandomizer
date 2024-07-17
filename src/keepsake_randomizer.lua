@@ -14,10 +14,42 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ]]
 
+local function isKeepsakeUnlocked(keepsakeName)
+    local keepsakeData = GetKeepsakeData(keepsakeName)
+    if keepsakeData ~= nil then
+        return IsGameStateEligible(CurrentRun, keepsakeData.GiftLevelData, keepsakeData.GiftLevelData.GameStateRequirements)
+    end
+
+    return false
+end
+
+local function hasAnyKeepsakesUnlocked()
+    for _, itemName in ipairs(ScreenData.KeepsakeRack.ItemOrder) do
+        local keepsakeData = GetKeepsakeData( itemName )
+        if keepsakeData ~= nil then
+            if isKeepsakeUnlocked(itemName) then
+                return true
+            end
+        end
+    end
+
+    return false
+end
+
 function Hades2Randomizer.randomizeKeepsakes()
+    if not hasAnyKeepsakesUnlocked() then
+        DebugPrint({Text = "No keepsakes unlocked, not randomizing keepsake"})
+        return
+    end
+
     local rng = Hades2Randomizer.Data.Rng
     local randomIndex = RandomInt(1, #Hades2Randomizer.Data.Keepsakes, rng)
     local randomKeepsake = Hades2Randomizer.Data.Keepsakes[randomIndex]
+
+    while not isKeepsakeUnlocked(randomKeepsake) do
+        randomIndex = RandomInt(1, #Hades2Randomizer.Data.Keepsakes, rng)
+        randomKeepsake = Hades2Randomizer.Data.Keepsakes[randomIndex]
+    end
 
     DebugPrint({Text = "Randomizing Keepsake: " .. randomKeepsake})
 

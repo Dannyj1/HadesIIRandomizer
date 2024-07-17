@@ -41,5 +41,7 @@ function Hades2Randomizer.randomizeWeapon()
 
         DebugPrint({ Text = "Randomizing aspect: " .. randomAspect })
         GameState.LastWeaponUpgradeName[randomWeapon] = randomAspect
+    else
+        DebugPrint({ Text = "No aspects unlocked for weapon " .. randomWeapon .. ", not randomizing aspect" })
     end
 end
