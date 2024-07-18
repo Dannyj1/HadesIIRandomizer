@@ -49,7 +49,7 @@ Hades2Randomizer.Data = {
                    "EliteAttributesRunBanOptions", "BiomeP", "ManaUpgrade", "NPC_Artemis_Field_01"},
     IgnoredEnemies = {"CrawlerMiniboss", "BattleStandardChronos"},
     --IgnoredWeaponOptions = {"HecateSplit1", "HecateSplit2", "HecateSplit3", "WaterUnitDive", "SirenDrummerBeatCoralFar", "ScyllaNotes", "Treant2RangedSpray"},
-    IgnoredWeaponOptions = {"HecateRangedTorchesSpirals", "HecateLaser", "HecateSplit1", "HecateSplit2", "HecateSplit3"},
+    IgnoredWeaponOptions = {"HecateRangedTorchesSpirals", "HecateLaser", "HecateSplit1", "HecateSplit2", "HecateSplit3", "ScyllaHeadbangFinisher"},
     UpgradePackages = {},
 }
 
