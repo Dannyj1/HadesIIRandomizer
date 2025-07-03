@@ -19,12 +19,10 @@ if not Hades2Randomizer.Config.Enabled then
 end
 
 function Hades2Randomizer.randomizeBoonOfferings()
-    LootData = DeepCopyTable(Hades2Randomizer.Data.LootData)
-
     local rng = Hades2Randomizer.Data.Rng
-    local availableWeaponUpgrades = DeepCopyTable(Hades2Randomizer.Data.WeaponUpgrades)
-    local availableTraits = DeepCopyTable(Hades2Randomizer.Data.Traits)
-    local availableConsumables = DeepCopyTable(Hades2Randomizer.Data.Consumables)
+    local availableWeaponUpgrades = ShallowCopyTable(Hades2Randomizer.Data.WeaponUpgrades)
+    local availableTraits = ShallowCopyTable(Hades2Randomizer.Data.Traits)
+    local availableConsumables = ShallowCopyTable(Hades2Randomizer.Data.Consumables)
     local mapping = {}
 
     DebugPrint({Text = "Randomizing Boons..."})
@@ -76,25 +74,25 @@ function Hades2Randomizer.randomizeBoonOfferings()
     for key, data in pairs(LootData) do
         if data.PriorityUpgrades ~= nil then
             for i, upgrade in ipairs(data.PriorityUpgrades) do
-                data.PriorityUpgrades[i] = mapping[upgrade]
+                Hades2Randomizer.trackAndChange(data.PriorityUpgrades, i, mapping[upgrade])
             end
         end
 
         if data.WeaponUpgrades ~= nil then
             for i, upgrade in ipairs(data.WeaponUpgrades) do
-                data.WeaponUpgrades[i] = mapping[upgrade]
+                Hades2Randomizer.trackAndChange(data.WeaponUpgrades, i, mapping[upgrade])
             end
         end
 
         if data.Traits ~= nil then
             for i, trait in ipairs(data.Traits) do
-                data.Traits[i] = mapping[trait]
+                Hades2Randomizer.trackAndChange(data.Traits, i, mapping[trait])
             end
         end
 
         if data.Consumables ~= nil then
             for i, consumable in ipairs(data.Consumables) do
-                data.Consumables[i] = mapping[consumable]
+                Hades2Randomizer.trackAndChange(data.Consumables, i, mapping[consumable])
             end
         end
 
@@ -106,10 +104,10 @@ function Hades2Randomizer.randomizeBoonOfferings()
 
                 if traitAmount > 0 then
                     if data.OffersElementalTrait == nil then
-                        data.OffersElementalTrait = {}
+                        Hades2Randomizer.trackAndChange(data, "OffersElementalTrait", {})
                     end
 
-                    local availableElementalTraits = DeepCopyTable(Hades2Randomizer.Data.ElementalTraits)
+                    local availableElementalTraits = ShallowCopyTable(Hades2Randomizer.Data.ElementalTraits)
 
                     for i = 1, traitAmount do
                         local randomIndex
@@ -122,12 +120,14 @@ function Hades2Randomizer.randomizeBoonOfferings()
 
                         DebugPrint({Text = "Elemental Trait: " .. key .. " -> " .. availableElementalTraits[randomIndex]})
 
-                        table.insert(data.OffersElementalTrait, availableElementalTraits[randomIndex])
+                        local newOffersElementalTrait = ShallowCopyTable(data.OffersElementalTrait) or {}
+                        table.insert(newOffersElementalTrait, availableElementalTraits[randomIndex])
+                        Hades2Randomizer.trackAndChange(data, "OffersElementalTrait", newOffersElementalTrait)
                         table.remove(availableElementalTraits, randomIndex)
                     end
                 else
                     DebugPrint({Text = "Elemental Trait: " .. key .. " -> No Elemental Traits"})
-                    data.OffersElementalTrait = nil
+                    Hades2Randomizer.trackAndChange(data, "OffersElementalTrait", nil)
                 end
             end
         end

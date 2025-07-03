@@ -21,9 +21,9 @@ end
 -- TODO: This function needs some cleanup...
 function Hades2Randomizer.randomizeEnemies()
     local rng = Hades2Randomizer.Data.Rng
-    local availableEnemies = DeepCopyTable(Hades2Randomizer.Data.Enemies)
-    local availableEliteEnemies = DeepCopyTable(Hades2Randomizer.Data.EliteEnemies)
-    local availableMiniBosses = DeepCopyTable(Hades2Randomizer.Data.MiniBosses)
+    local availableEnemies = ShallowCopyTable(Hades2Randomizer.Data.Enemies)
+    local availableEliteEnemies = ShallowCopyTable(Hades2Randomizer.Data.EliteEnemies)
+    local availableMiniBosses = ShallowCopyTable(Hades2Randomizer.Data.MiniBosses)
     local enemiesMapping = {}
 
     DebugPrint({ Text = "Randomizing Enemies..." })
@@ -31,13 +31,13 @@ function Hades2Randomizer.randomizeEnemies()
     for _, values in pairs(EnemyData) do
         -- To fix the spawn locations of certain enemies after randomizing them to a location other than their vanilla location, remove the RequiredSpawnPoint and make it preferred instead.
         if values.RequiredSpawnPoint ~= nil then
-            values.PreferredSpawnPoint = values.RequiredSpawnPoint
-            values.RequiredSpawnPoint = nil
+            Hades2Randomizer.trackAndChange(values, "PreferredSpawnPoint", values.RequiredSpawnPoint)
+            Hades2Randomizer.trackAndChange(values, "RequiredSpawnPoint", nil)
         end
 
         -- Disable intro encounters as they mess with the difficulty
         if values.IntroEncounterName ~= nil then
-            values.IntroEncounterName = nil
+            Hades2Randomizer.trackAndChange(values, "IntroEncounterName", nil)
         end
     end
 
@@ -55,7 +55,7 @@ function Hades2Randomizer.randomizeEnemies()
         table.remove(availableEnemies, randomIndex)
 
         if #availableEnemies <= 0 then
-            availableEnemies = DeepCopyTable(Hades2Randomizer.Data.Enemies)
+            availableEnemies = ShallowCopyTable(Hades2Randomizer.Data.Enemies)
         end
     end
 
@@ -72,7 +72,7 @@ function Hades2Randomizer.randomizeEnemies()
         table.remove(availableEliteEnemies, randomIndex)
 
         if #availableEliteEnemies <= 0 then
-            availableEnemies = DeepCopyTable(Hades2Randomizer.Data.EliteEnemies)
+            availableEliteEnemies = ShallowCopyTable(Hades2Randomizer.Data.EliteEnemies)
         end
     end
 
@@ -89,14 +89,14 @@ function Hades2Randomizer.randomizeEnemies()
         table.remove(availableMiniBosses, randomIndex)
 
         if #availableMiniBosses <= 0 then
-            availableEnemies = DeepCopyTable(Hades2Randomizer.Data.MiniBosses)
+            availableMiniBosses = ShallowCopyTable(Hades2Randomizer.Data.MiniBosses)
         end
     end
 
     -- re-fill availableEnemies, availableEliteEnemies and availableMiniBosses. Remove any weapon that has spawner options.
-    availableEnemies = DeepCopyTable(Hades2Randomizer.Data.Enemies)
-    availableEliteEnemies = DeepCopyTable(Hades2Randomizer.Data.EliteEnemies)
-    availableMiniBosses = DeepCopyTable(Hades2Randomizer.Data.MiniBosses)
+    availableEnemies = ShallowCopyTable(Hades2Randomizer.Data.Enemies)
+    availableEliteEnemies = ShallowCopyTable(Hades2Randomizer.Data.EliteEnemies)
+    availableMiniBosses = ShallowCopyTable(Hades2Randomizer.Data.MiniBosses)
 
     for _, enemy in ipairs(Hades2Randomizer.Data.Enemies) do
         local enemyWeaponOptions = EnemyData[enemy].WeaponOptions
@@ -197,14 +197,13 @@ function Hades2Randomizer.randomizeEnemies()
         end
 
         if data.EnemySet ~= nil and #data.EnemySet > 0 then
-            local enemySetCopy = DeepCopyTable(data.EnemySet)
-
-            data.EnemySet = {}
-            for _, enemy in ipairs(enemySetCopy) do
+            local newEnemySet = {}
+            for _, enemy in ipairs(data.EnemySet) do
                 if enemiesMapping[enemy] ~= nil then
-                    table.insert(data.EnemySet, enemiesMapping[enemy])
+                    table.insert(newEnemySet, enemiesMapping[enemy])
                 end
             end
+            Hades2Randomizer.trackAndChange(data, "EnemySet", newEnemySet)
         end
 
         if data.ManualWaveTemplates ~= nil then
@@ -212,9 +211,9 @@ function Hades2Randomizer.randomizeEnemies()
                 if wave.Spawns ~= nil then
                     for _, spawn in ipairs(wave.Spawns) do
                         if spawn.Name ~= nil and enemiesMapping[spawn.Name] ~= nil then
-                            spawn.Name = enemiesMapping[spawn.Name]
+                            Hades2Randomizer.trackAndChange(spawn, "Name", enemiesMapping[spawn.Name])
                         else
-                            spawn = nil
+                            Hades2Randomizer.trackAndChange(wave.Spawns, spawn, nil)
                         end
                     end
                 end
@@ -226,9 +225,9 @@ function Hades2Randomizer.randomizeEnemies()
                 if wave.Spawns ~= nil then
                     for _, spawn in ipairs(wave.Spawns) do
                         if spawn.Name ~= nil and enemiesMapping[spawn.Name] ~= nil then
-                            spawn.Name = enemiesMapping[spawn.Name]
+                            Hades2Randomizer.trackAndChange(spawn, "Name", enemiesMapping[spawn.Name])
                         else
-                            spawn = nil
+                            Hades2Randomizer.trackAndChange(wave.Spawns, spawn, nil)
                         end
                     end
                 end
@@ -240,9 +239,9 @@ function Hades2Randomizer.randomizeEnemies()
                 if wave.Spawns ~= nil then
                     for _, spawn in ipairs(wave.Spawns) do
                         if spawn.Name ~= nil and enemiesMapping[spawn.Name] ~= nil then
-                            spawn.Name = enemiesMapping[spawn.Name]
+                            Hades2Randomizer.trackAndChange(spawn, "Name", enemiesMapping[spawn.Name])
                         else
-                            spawn = nil
+                            Hades2Randomizer.trackAndChange(wave.Spawns, spawn, nil)
                         end
                     end
                 end
@@ -252,14 +251,14 @@ function Hades2Randomizer.randomizeEnemies()
         -- Update WipeEnemiesOnKill so miniboss summons are wiped on kill
         if data.WipeEnemiesOnKill ~= nil then
             if enemiesMapping[data.WipeEnemiesOnKill] ~= nil then
-                data.WipeEnemiesOnKill = enemiesMapping[data.WipeEnemiesOnKill]
+                Hades2Randomizer.trackAndChange(data, "WipeEnemiesOnKill", enemiesMapping[data.WipeEnemiesOnKill])
             end
         end
 
         if data.WipeEnemiesOnKillAllTypes ~= nil then
             for i, enemy in ipairs(data.WipeEnemiesOnKillAllTypes) do
                 if enemiesMapping[enemy] ~= nil then
-                    data.WipeEnemiesOnKillAllTypes[i] = enemiesMapping[enemy]
+                    Hades2Randomizer.trackAndChange(data.WipeEnemiesOnKillAllTypes, i, enemiesMapping[enemy])
                 end
             end
         end
@@ -274,7 +273,7 @@ function Hades2Randomizer.randomizeEnemies()
 
         for i, enemy in ipairs(enemies) do
             if enemiesMapping[enemy] ~= nil then
-                enemies[i] = enemiesMapping[enemy]
+                Hades2Randomizer.trackAndChange(enemies, i, enemiesMapping[enemy])
             end
         end
 
@@ -286,30 +285,28 @@ function Hades2Randomizer.randomizeEnemies()
         if weaponData.AIData ~= nil and weaponData.AIData.SpawnerOptions ~= nil then
             for i, enemyName in ipairs(weaponData.AIData.SpawnerOptions) do
                 if enemiesMapping[enemyName] ~= nil then
-                    weaponData.AIData.SpawnerOptions[i] = enemiesMapping[enemyName]
+                    Hades2Randomizer.trackAndChange(weaponData.AIData.SpawnerOptions, i, enemiesMapping[enemyName])
                 end
             end
         end
     end
 
     -- Apply to Vow of Wandering SwapMap
-    local originalSwapMap = DeepCopyTable(MetaUpgradeData.NextBiomeEnemyShrineUpgrade.SwapMap)
-    MetaUpgradeData.NextBiomeEnemyShrineUpgrade.SwapMap = {}
-
-    for key, value in pairs(originalSwapMap) do
+    local newSwapMap = {}
+    for key, value in pairs(MetaUpgradeData.NextBiomeEnemyShrineUpgrade.SwapMap) do
         local newKey = key
-        local newValue = value.Name
+        local newValueName = value.Name
 
         if enemiesMapping[key] ~= nil then
             newKey = enemiesMapping[key]
         end
 
         if enemiesMapping[value.Name] ~= nil then
-            newValue = enemiesMapping[value.Name]
+            newValueName = enemiesMapping[value.Name]
         end
-
-        MetaUpgradeData.NextBiomeEnemyShrineUpgrade.SwapMap[newKey] = { Name = newValue }
+        newSwapMap[newKey] = { Name = newValueName }
     end
+    Hades2Randomizer.trackAndChange(MetaUpgradeData.NextBiomeEnemyShrineUpgrade, "SwapMap", newSwapMap)
 
     DebugPrintTable(MetaUpgradeData.NextBiomeEnemyShrineUpgrade.SwapMap, true, 0)
 end

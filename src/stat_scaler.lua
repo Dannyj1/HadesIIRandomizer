@@ -98,33 +98,45 @@ function Hades2Randomizer.scaleEarlyGameStats()
 
         if Hades2Randomizer.isMiniBoss(enemyName) then
             if values.MaxHealth ~= nil then
+                if originalMaxMinibossHealth[enemyName] == nil then
+                    originalMaxMinibossHealth[enemyName] = values.MaxHealth
+                end
                 values.MaxHealth = math.min(values.MaxHealth, maxMinibossHealth)
-                originalMaxMinibossHealth[enemyName] = values.MaxHealth
             end
 
             if values.HealthBuffer ~= nil then
+                if originalMaxMinibossArmor[enemyName] == nil then
+                    originalMaxMinibossArmor[enemyName] = values.HealthBuffer
+                end
                 values.HealthBuffer = math.min(values.HealthBuffer, maxMinibossArmor)
-                originalMaxMinibossArmor[enemyName] = values.HealthBuffer
             end
 
             if values.GeneratorData.DifficultyRating ~= nil then
+                if originalDifficulty[enemyName] == nil then
+                    originalDifficulty[enemyName] = values.GeneratorData.DifficultyRating
+                end
                 values.GeneratorData.DifficultyRating = math.min(values.GeneratorData.DifficultyRating, maxDifficulty)
-                originalDifficulty[enemyName] = values.GeneratorData.DifficultyRating
             end
         else
             if values.MaxHealth ~= nil then
+                if originalMaxHealth[enemyName] == nil then
+                    originalMaxHealth[enemyName] = values.MaxHealth
+                end
                 values.MaxHealth = math.min(values.MaxHealth, maxHealth)
-                originalMaxHealth[enemyName] = values.MaxHealth
             end
 
             if values.HealthBuffer ~= nil then
+                if originalMaxArmor[enemyName] == nil then
+                    originalMaxArmor[enemyName] = values.HealthBuffer
+                end
                 values.HealthBuffer = math.min(values.HealthBuffer, maxArmor)
-                originalMaxArmor[enemyName] = values.HealthBuffer
             end
 
-            if values.GeneratorData.DifficultyRating ~= nil then
+            if values.GeneratorData ~= nil and values.GeneratorData.DifficultyRating ~= nil then
+                if originalDifficulty[enemyName] == nil then
+                    originalDifficulty[enemyName] = values.GeneratorData.DifficultyRating
+                end
                 values.GeneratorData.DifficultyRating = math.min(values.GeneratorData.DifficultyRating, maxDifficulty)
-                originalDifficulty[enemyName] = values.GeneratorData.DifficultyRating
             end
         end
 
@@ -160,18 +172,24 @@ function Hades2Randomizer.scaleLateGameStats()
         end
 
         if values.MaxHealth ~= nil and values.MaxHealth >= 10 then
+            if originalMaxHealth[enemyName] == nil then
+                originalMaxHealth[enemyName] = values.MaxHealth
+            end
             values.MaxHealth = math.max(values.MaxHealth, minHealth)
-            originalMaxHealth[enemyName] = values.MaxHealth
         end
 
         if values.HealthBuffer ~= nil and values.MaxHealth >= 10 then
+            if originalMaxArmor[enemyName] == nil then
+                originalMaxArmor[enemyName] = values.HealthBuffer
+            end
             values.HealthBuffer = math.max(values.HealthBuffer, minArmor)
-            originalMaxArmor[enemyName] = values.HealthBuffer
         end
 
         if values.GeneratorData.DifficultyRating ~= nil then
+            if originalDifficulty[enemyName] == nil then
+                originalDifficulty[enemyName] = values.GeneratorData.DifficultyRating
+            end
             values.GeneratorData.DifficultyRating = math.max(values.GeneratorData.DifficultyRating, minDifficulty)
-            originalDifficulty[enemyName] = values.GeneratorData.DifficultyRating
         end
 
         ::continue::

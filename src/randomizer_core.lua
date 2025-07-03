@@ -20,11 +20,8 @@ end
 
 local oStartOver = StartOver
 function StartOver(args)
+    Hades2Randomizer.revertAllChanges()
     Hades2Randomizer.Data.RoomCounter = 0
-    EncounterData = DeepCopyTable(Hades2Randomizer.Data.EncounterData)
-    EnemySets = DeepCopyTable(Hades2Randomizer.Data.EnemySets)
-    EnemyData = DeepCopyTable(Hades2Randomizer.Data.EnemyData)
-    MetaUpgradeData.NextBiomeEnemyShrineUpgrade.SwapMap = DeepCopyTable(Hades2Randomizer.Data.SwapMap)
 
     if Hades2Randomizer.Config.RandomizeEnemies then
         Hades2Randomizer.randomizeEnemies()

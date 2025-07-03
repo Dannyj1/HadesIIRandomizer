@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+This release should now work on the latest patch and should (hopefully) be more resilient to failure after patches.
+
+### Fixed
+
+- Fixed a "not enough memory" crash on startup that was introduced by one of the more recent patches.
+- Fixed a crash on run start that was introduced by one of the more recent patches.
+- Corrected a bug where elite enemies and mini-bosses might not have been randomized correctly in some encounters.
 
 ## [1.5.0] - 2024-07-17
 

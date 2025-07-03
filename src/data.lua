@@ -22,12 +22,6 @@ Hades2Randomizer.Data = {
     RoomCounter = 0,
     Rng = RandomInit(64),
 
-    EncounterData = nil,
-    EnemySets = nil,
-    EnemyData = nil,
-    LootData = nil,
-    SwapMap = nil,
-
     PriorityUpgrades = {},
     WeaponUpgrades = {},
     Traits = {},
@@ -85,12 +79,6 @@ local function addEnemyToData(enemy)
 end
 
 ModUtil.LoadOnce(function()
-    Hades2Randomizer.Data.EncounterData = DeepCopyTable(EncounterData)
-    Hades2Randomizer.Data.EnemySets = DeepCopyTable(EnemySets)
-    Hades2Randomizer.Data.EnemyData = DeepCopyTable(EnemyData)
-    Hades2Randomizer.Data.LootData = DeepCopyTable(LootData)
-    Hades2Randomizer.Data.SwapMap = DeepCopyTable(MetaUpgradeData.NextBiomeEnemyShrineUpgrade.SwapMap)
-
     -- Load enemy data
     for biome, enemies in pairs(EnemySets) do
         if Hades2Randomizer.tableContains(Hades2Randomizer.Data.IgnoredSets, biome) then

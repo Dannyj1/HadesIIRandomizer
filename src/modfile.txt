@@ -2,6 +2,7 @@ Top Import "register.lua"
 Top Import "config.lua"
 
 Import "utils.lua"
+Import "change_tracker.lua"
 Import "data.lua"
 Import "enemy_randomizer.lua"
 Import "boon_randomizer.lua"
