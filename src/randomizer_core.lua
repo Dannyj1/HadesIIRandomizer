@@ -55,13 +55,15 @@ function LoadMap(argTable)
     oLoadMap(argTable)
 
     -- Deal with missing textures by loading the packages for all area and loading packages for equipped boons and keeping them loaded
-    LoadPackages({ Name = "Erebus" })
-    LoadPackages({ Name = "Oceanus" })
-    LoadPackages({ Name = "Fields" })
-    LoadPackages({ Name = "Tartarus" })
-    LoadPackages({ Name = "Ephyra" })
-    LoadPackages({ Name = "Thessaly" })
-    LoadPackages({ Name = "Asphodel" })
+    LoadPackages({ Name = "BiomeB" })
+    LoadPackages({ Name = "BiomeF" })
+    LoadPackages({ Name = "BiomeG" })
+    LoadPackages({ Name = "BiomeH" })
+    LoadPackages({ Name = "BiomeI" })
+    LoadPackages({ Name = "BiomeN" })
+    LoadPackages({ Name = "BiomeO" })
+    LoadPackages({ Name = "BiomeP" })
+    LoadPackages({ Name = "BiomeQ" })
 
     for _, trait in pairs(CurrentRun.Hero.Traits) do
         if Hades2Randomizer.Data.UpgradePackages[trait.Name] ~= nil then
