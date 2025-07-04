@@ -10,7 +10,7 @@ This release should now work on the latest patch and should (hopefully) be more 
 
 ### Fixed
 
-- Fixed a "not enough memory" crash on startup that was introduced by one of the more recent patches.
+- Fixed a "not enough memory" crash on startup that was introduced by one of the recent patches.
 - Fixed a crash on run start that was introduced by one of the more recent patches.
 - Fixed a bug where elite enemies and mini-bosses might not have been randomized correctly in some encounters.
 - Textures for enemies randomized outside of their biome should not properly load again, instead of being blacked out or missing.
