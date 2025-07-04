@@ -165,14 +165,26 @@ function Hades2Randomizer.randomizeEnemies()
                                         local randomIndex
 
                                         if Hades2Randomizer.isEnemy(mapping) then
+                                            if #availableEnemies <= 0 then
+                                                availableEnemies = ShallowCopyTable(Hades2Randomizer.Data.Enemies)
+                                            end
+
                                             randomIndex = RandomInt(1, #availableEnemies, rng)
                                             enemiesMapping[spawnedEnemyName] = availableEnemies[randomIndex]
                                             table.remove(availableEnemies, randomIndex)
                                         elseif Hades2Randomizer.isElite(mapping) then
+                                            if #availableEliteEnemies <= 0 then
+                                                availableEliteEnemies = ShallowCopyTable(Hades2Randomizer.Data.EliteEnemies)
+                                            end
+                                            
                                             randomIndex = RandomInt(1, #availableEliteEnemies, rng)
                                             enemiesMapping[spawnedEnemyName] = availableEliteEnemies[randomIndex]
                                             table.remove(availableEliteEnemies, randomIndex)
                                         elseif Hades2Randomizer.isMiniBoss(mapping) then
+                                            if #availableMiniBosses <= 0 then
+                                                availableMiniBosses = ShallowCopyTable(Hades2Randomizer.Data.MiniBosses)
+                                            end
+                                            
                                             randomIndex = RandomInt(1, #availableMiniBosses, rng)
                                             enemiesMapping[spawnedEnemyName] = availableMiniBosses[randomIndex]
                                             table.remove(availableMiniBosses, randomIndex)
@@ -209,11 +221,11 @@ function Hades2Randomizer.randomizeEnemies()
         if data.ManualWaveTemplates ~= nil then
             for _, wave in pairs(data.ManualWaveTemplates) do
                 if wave.Spawns ~= nil then
-                    for _, spawn in ipairs(wave.Spawns) do
+                    for i, spawn in ipairs(wave.Spawns) do
                         if spawn.Name ~= nil and enemiesMapping[spawn.Name] ~= nil then
                             Hades2Randomizer.trackAndChange(spawn, "Name", enemiesMapping[spawn.Name])
                         else
-                            Hades2Randomizer.trackAndChange(wave.Spawns, spawn, nil)
+                            Hades2Randomizer.trackAndChange(wave.Spawns, i, nil)
                         end
                     end
                 end
@@ -223,11 +235,11 @@ function Hades2Randomizer.randomizeEnemies()
         if data.SpawnWaves ~= nil then
             for _, wave in pairs(data.SpawnWaves) do
                 if wave.Spawns ~= nil then
-                    for _, spawn in ipairs(wave.Spawns) do
+                    for i, spawn in ipairs(wave.Spawns) do
                         if spawn.Name ~= nil and enemiesMapping[spawn.Name] ~= nil then
                             Hades2Randomizer.trackAndChange(spawn, "Name", enemiesMapping[spawn.Name])
                         else
-                            Hades2Randomizer.trackAndChange(wave.Spawns, spawn, nil)
+                            Hades2Randomizer.trackAndChange(wave.Spawns, i, nil)
                         end
                     end
                 end
@@ -237,11 +249,11 @@ function Hades2Randomizer.randomizeEnemies()
         if data.WaveTemplates ~= nil then
             for _, wave in pairs(data.WaveTemplates) do
                 if wave.Spawns ~= nil then
-                    for _, spawn in ipairs(wave.Spawns) do
+                    for i, spawn in ipairs(wave.Spawns) do
                         if spawn.Name ~= nil and enemiesMapping[spawn.Name] ~= nil then
                             Hades2Randomizer.trackAndChange(spawn, "Name", enemiesMapping[spawn.Name])
                         else
-                            Hades2Randomizer.trackAndChange(wave.Spawns, spawn, nil)
+                            Hades2Randomizer.trackAndChange(wave.Spawns, i, nil)
                         end
                     end
                 end
