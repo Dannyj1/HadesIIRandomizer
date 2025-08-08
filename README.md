@@ -9,7 +9,7 @@ Please keep in mind that this mod is in it's early stages, so there might be iss
 - **Enemies**: Enemies, elite enemies and minibosses are randomized. This means that you can encounter an enemy from, for example, the Fields of Mourning in Erebus or even surface enemies in the underworld.
 - **Boons**: Boons/Offerings from gods are randomized. This means that, for example, Poseidon can offer upgrades from Aphrodite or Demeter instead of the usual Poseidon boons. Boons are only randomized at the start of the run, so a god will keep offering the same boons for the whole run, until you start a new run.
 - **Elemental Traits**: The elemental traits (water, fire, etc.) offered by the gods are randomized. This affects the way you should approach infusion boons.
-- **Keepsake**: The keepsake you start with is randomized. This only randomly selects a keepsake that you have unlocked, so you will not start with a keepsake you have not unlocked yet.
+- **Keepsake**: The keepsake you start with is randomized. It is also randomized again every time you enter a new biome, while locking you out of changing it. The randomized keepsake can be any keepsake in the game, including the ones you have not unlocked yet.
 - **Weapon**: The weapon you start with is randomized. This only randomly selects a weapon that you have unlocked, so you will not start with a weapon you have not unlocked yet.
 - **Weapon Aspect**: The aspect of the weapon you start with is randomized. This only randomly selects an aspect that you have unlocked.
 - **Arcana Cards**: Randomly equips or unequips arcana cards at the start of the run according to the chance set in the config. Only changes the cards that you have already unlocked.
